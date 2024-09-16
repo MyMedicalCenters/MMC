@@ -18,54 +18,45 @@
             background-color: #333333;
             color: #dcdcdc;
             text-align: center;
-            padding: 20px 0;
-            position: relative;
-            z-index: 1;
+            padding: 20px 10px; /* Reduced padding for smaller screens */
         }
 
         header h1 {
             margin: 0;
-            font-size: 2em;
-            font-weight: normal;
+            font-size: 1.5em; /* Adjust font size for smaller screens */
         }
+
         body, html {
             margin: 0;
             font-family: Arial, sans-serif;
             background-color: #f4f4f4;
         }
+
         .logo {
             position: absolute;
-            top: 50px;
-            left: 30px;
-            width: 130px;
+            top: 20px; /* Adjust positioning */
+            left: 10px; /* Adjust positioning */
+            width: 100px; /* Adjust size for smaller screens */
             height: auto;
-            transition: transform 0.3s; /* Add a smooth hover effect */
-        }
-
-        .logo:hover {
-            transform: scale(1.1); /* Slightly enlarge the logo on hover */
         }
 
         .header-image {
             width: 100%;
             height: auto;
             object-fit: cover;
-            margin: 0; /* Remove any margin */
-            padding: 0; /* Remove any padding */
-            display: block; /* Ensure the image is treated as a block element */
         }
 
         .content {
             background-color: #333333;
-            padding: 20px;
+            padding: 20px 10px; /* Adjust padding for mobile */
             color: white;
             text-align: center;
         }
 
         .cta-button {
             display: inline-block;
-            padding: 30px 30px;
-            margin-top: 50px;
+            padding: 15px 20px; /* Adjust padding for mobile */
+            margin-top: 20px; /* Adjust margin for mobile */
             background-color: white;
             color: #333333;
             border-radius: 5px;
@@ -75,67 +66,49 @@
         }
 
         .cta-button:hover {
-            transform: scale(1.1);
-            box-shadow: 0 0 10px white;
+            transform: scale(1.05);
+            box-shadow: 0 0 8px white; /* Adjust shadow for mobile */
         }
 
         .animated-rectangle {
-            margin: 120px auto;
-            max-width: 80%;
-            padding: 100px; /* Increased padding for height */
+            margin: 20px auto; /* Reduce margin for mobile */
+            max-width: 90%; /* Adjust max-width for smaller screens */
+            padding: 50px; /* Adjust padding for mobile */
             background-color: #dcdcdc;
             border-radius: 15px;
             text-align: center;
             animation: pulse 5s infinite;
             color: #333333;
-            transform: scale(1.2); /* Enlarge the entire box */
-        }
-
-        .animated-rectangle h2, .animated-rectangle p {
-            margin: 20;
         }
 
         .animated-rectangle h2 {
-            font-size: 3.5em; /* Increase heading font size */
-            margin-bottom: 30px; /* Add more space below heading */
+            font-size: 2.5em; /* Adjust font size for mobile */
+            margin-bottom: 20px; /* Adjust margin for mobile */
         }
 
         .animated-rectangle p {
-            font-size: 1.8em; /* Increase paragraph font size */
-        }
-
-        @keyframes pulse {
-            0%, 100% {
-                transform: scale(1);
-            }
-            50% {
-                transform: scale(1.05);
-            }
+            font-size: 1.2em; /* Adjust font size for mobile */
         }
 
         .form-section {
             background-color: #dcdcdc;
-            padding: 40px 20px;
+            padding: 20px 10px; /* Adjust padding for mobile */
             text-align: center;
-            display: flex; /* Enable flexbox */
-            flex-direction: column; /* Stack the elements vertically */
-            align-items: center; /* Center items horizontally */
-            justify-content: center; /* Center items vertically */
-            margin: 0 auto; /* Center the section horizontally on the page */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
 
         .form-section > div {
-            display: inline-block;
-            vertical-align: middle;
-            max-width: 35%;
+            display: block; /* Stack items vertically on mobile */
+            width: 100%; /* Full width for mobile */
         }
 
         .form-section h3 {
-            margin: 0;
+            margin: 10px 0 20px;
             color: #333333;
             font-weight: bold;
-            font-size: 1.5em;
-            margin: 10px 0 20px 1%; /* Shift the form more to the left */
+            font-size: 1.2em; /* Adjust font size for mobile */
         }
 
         form {
@@ -157,42 +130,23 @@
         }
 
         .contact-info {
-            text-align: left;
-            position: relative;
-            top: -710px; /* Move it up */
-            left: 115px; /* Move it to the left */
-            font-size: 1.5em; /* Adjust the font size as needed */
-        }
-
-        .contact-info a {
-            color: inherit;
-            text-decoration: none;
-            border-bottom: 1px dotted transparent;
-            transition: border-bottom 0.3s;
-        }
-
-        .contact-info a:hover {
-            border-bottom: 1px dotted #333333;
+            text-align: center; /* Center content on mobile */
+            font-size: 1.2em; /* Adjust font size for mobile */
         }
 
         .contact-info .phone {
-            text-align: center; /* Center the phone number */
-            margin-top: 10px; /* Add some space above */
-        }
-
-        .contact-info .email {
-            text-align: left; /* Ensure the email remains left-aligned */
+            margin-top: 10px;
         }
 
         footer {
             background-color: #333333;
             color: #dcdcdc;
             text-align: center;
-            padding: 20px 0; /* Increased padding for better visibility */
-            width: 100%; /* Ensure the footer spans the full width */
-            position: relative; /* Ensure it's positioned correctly */
-            box-sizing: border-box; /* Include padding in width calculation */
+            padding: 10px 5px; /* Adjust padding for mobile */
+            width: 100%;
+            box-sizing: border-box;
         }
+
     </style>
 </head>
 <body>
