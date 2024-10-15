@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Medical Centers - Your Health, Our Priority</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+
+    :root {
+      --primary: #0077be; /* Blue */
+      --secondary: #f0f8ff; /* Light Blue */
+      --accent: #ff6b6b; /* Red */
+      --client: #28a745; /* Green */
+    }
+
+    body, html {
+      margin: 0;
+      padding: 0;
+      font-family: 'Poppins', sans-serif;
+      overflow-x: hidden;
+      height: 100%;
+    }
+
+    .header {
+      background-color: white;
+      color: var(--primary);
+      padding: 1rem;
+      position: fixed;
+      width: 100%;
+      z-index: 1000;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+
+    .logo {
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: var(--primary);
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+    }
+
+    .nav a {
+      color: var(--primary);
+      text-decoration: none;
+      margin-left: 1rem;
+      transition: color 0.3s ease;
+      font-weight: 400;
+    }
+
+    .nav a:hover {
+      color: var(--accent);
+    }
+
+    .video-container {
+      position: relative;
+      width: 100%;
+      height: calc(100vh - 60px); /* Fullscreen, accounting for the header */
+      overflow: hidden;
+      top: 60px;
+    }
+
+    #mainVideo {
+      width: 100%;
+      height: 100%;
+      object-fit: contain; /* Maintain aspect ratio and prevent overlap */
+    }
+
+    .video-controls {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      z-index: 10;
+    }
+
+    #playPauseBtn {
+      background-color: rgba(255, 255, 255, 0.7);
+      border: none;
+      border-radius: 50%;
+      width: 50px;
+      height: 50px;
+      font-size: 24px;
+      cursor: pointer;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      transition: background-color 0.3s ease;
+    }
+
+    #playPauseBtn:hover {
+      background-color: rgba(255, 255, 255, 0.9);
+    }
+
+    /* End of Video Buttons */
+    #endButtons {
+      position: absolute;
+      bottom: 20%;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      justify-content: space-between;
+      width: 80%;
+    }
+
+    .end-button {
+      background-color: var(--primary);
+      color: white;
+      padding: 1.5rem 3rem;
+      border: none;
+      border-radius: 25px;
+      font-size: 1.2rem;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      flex: 1;
+      margin: 0 1rem;
+      animation: zoomInOut 2s infinite; /* Zoom animation */
+    }
+
+    .end-button:hover {
+      background-color: #005c91;
+    }
+
+    /* Animation for end buttons */
+    @keyframes zoomInOut {
+      0%, 100% {
+        transform: scale(1);
+      }
+      50% {
+        transform: scale(1.1);
+      }
+    }
+
+    /* Popup Styles */
+    .popup-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.5);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 2000;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.3s ease, visibility 0.3s ease;
+    }
+
+    .popup-overlay.show {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .popup {
+      background-color: white;
+      padding: 2rem;
+      border-radius: 10px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      max-width: 400px;
+      width: 90%;
+      text-align: center;
+    }
+
+    /* Button Styles */
+    .button {
+      padding: 0.8rem 2rem;
+      border-radius: 50px; /* Circle-edged rectangle */
+      font-size: 1rem;
+      color: white;
+      border: none;
+      cursor: pointer;
+      margin: 1rem 0;
+      width: 100%;
+      transition: background-color 0.3s ease;
+    }
+
+    .button.professionals {
+      background-color: var(--primary); /* Blue for Medical Professionals */
+    }
+
+    .button.professionals:hover {
+      background-color: #005c91;
+    }
+
+    .button.clients {
+      background-color: var(--client); /* Green for Clients */
+    }
+
+    .button.clients:hover {
+      background-color: #218838;
+    }
+  </style>
+</head>
+<body>
+  <header class="header">
+    <div class="logo">My Medical Centers</div>
+    <nav class="nav">
+      <a href="/">Home</a>
+      <a href="/services.html">Our Services</a>
+      <a href="/waitlist">Join Our Waitlist!</a>
+      <a href="/for-professionals">For Medical Professionals</a>
+      <a href="/for-clients" id="forClientsLink">For Clients</a>
+    </nav>
+  </header>
+
+  <!-- Video Section -->
+  <main class="video-container">
+    <video id="mainVideo" muted>
+      <source src="https://github.com/MyMedicalCenters/My-Medical-Centers/raw/refs/heads/main/Welcome%20to%20Our%20Medical%20Clinic%20(1).mp4" type="video/mp4">
+      Your browser does not support the video tag.
+    </video>
+    <div class="video-controls">
+      <button id="playPauseBtn">▶</button>
+    </div>
+    <div id="endButtons" style="display: none;">
+      <button id="learnMoreBtn" class="end-button">Learn more about our services!</button>
+      <button id="joinWaitlistBtn" class="end-button">Join Our Waitlist!</button>
+    </div>
+  </main>
+
+  <!-- Popup -->
+  <div class="popup-overlay" id="popupOverlay">
+    <div class="popup">
+      <h2>Welcome to My Medical Centers</h2>
+      <p>Please select your role:</p>
+      <button class="button professionals">I'm a Medical Professional</button>
+      <button class="button clients" id="clientButton">I'm a Client</button>
+    </div>
+  </div>
+
+  <script>
+    const video = document.getElementById('mainVideo');
+    const playPauseBtn = document.getElementById('playPauseBtn');
+    const endButtons = document.getElementById('endButtons');
+    const popupOverlay = document.getElementById('popupOverlay');
+
+    // Show popup on page load
+    window.addEventListener('load', () => {
+      popupOverlay.classList.add('show');
+    });
+
+    // Play video with sound when "For Clients" is clicked
+    document.getElementById('clientButton').addEventListener('click', () => {
+      popupOverlay.classList.remove('show'); // Close the popup when clicked
+      video.muted = false; // Unmute video
+      video.play(); // Play the video
+      playPauseBtn.innerHTML = '❚❚'; // Change to pause icon
+    });
+
+    // Toggle play/pause with the button
+    playPauseBtn.addEventListener('click', () => {
+      if (video.paused) {
+        video.play();
+        playPauseBtn.innerHTML = '❚❚'; // Pause icon
+      } else {
+        video.pause();
+        playPauseBtn.innerHTML = '▶'; // Play icon
+      }
+    });
+
+    // On video end, dim the video, hide the play/pause button, and show end buttons
+    video.addEventListener('ended', () => {
+      video.style.filter = 'brightness(0.5)'; // Dim the video
+      playPauseBtn.style.display = 'none'; // Hide the play/pause button
+      endButtons.style.display = 'flex'; // Show end buttons
+    });
+
+    // Ensure the video fits the viewport without overlap or white space
+    window.addEventListener('resize', () => {
+      const headerHeight = document.querySelector('.header').offsetHeight;
+      document.querySelector('.video-container').style.height = `calc(100vh - ${headerHeight}px)`;
+    });
+
+    // Initial adjustment to fit the video when the page loads
+    window.addEventListener('load', () => {
+      const headerHeight = document.querySelector('.header').offsetHeight;
+      document.querySelector('.video-container').style.height = `calc(100vh - ${headerHeight}px)`;
+    });
+  </script>
+</body>
+</html>
