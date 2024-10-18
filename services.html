@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Our Services - My Medical Centers</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+  
+    :root {
+      --primary: #0077be;
+      --secondary: #f0f8ff;
+      --accent: #ff6b6b;
+      --text: #333;
+    }
+  
+    body, html {
+      margin: 0;
+      padding: 0;
+      font-family: 'Poppins', sans-serif;
+      color: var(--text);
+      overflow-x: hidden;
+    }
+
+    /* Logo at the top left */
+    .logo-container {
+      position: absolute;
+      top: 60px;
+      left: 10px;
+      z-index: 1000;
+      width: 100px;
+      scale: 75%;
+      transition: transform 0.3s ease-in-out;
+      cursor: pointer;
+    }
+
+    .logo-container img {
+      width: 100%;
+      height: auto;
+    }
+
+    .logo-container:hover {
+      transform: scale(1.1); /* Logo grows on hover */
+    }
+
+    .logo-container:active {
+      transform: scale(1.2); /* Logo grows more when clicked */
+    }
+
+    .header {
+      background-color: white;
+      color: var(--primary);
+      padding: 1rem;
+      position: fixed;
+      width: 100%;
+      z-index: 1001;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      max-width: 100%; /* Ensure it doesn’t stretch past the viewport */
+      box-sizing: border-box; /* Include padding within the width */
+      overflow: hidden; /* Prevent content from overflowing */
+    }
+  
+    .logo {
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: var(--primary);
+    }
+  
+    .nav {
+      display: flex;
+      align-items: center;
+    }
+  
+    .nav a {
+      color: var(--primary);
+      text-decoration: none;
+      margin-left: 1rem;
+      transition: color 0.3s ease;
+      font-weight: 400;
+    }
+  
+    .nav a:hover {
+      color: var(--accent);
+    }
+  
+    .services-container {
+      padding-top: 80px;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 2rem;
+    }
+  
+    h1 {
+      color: var(--primary);
+      text-align: center;
+      margin-bottom: 2rem;
+      font-size: 2.5rem;
+    }
+  
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+    }
+  
+    .service-card {
+      background-color: white;
+      border-radius: 10px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      overflow: hidden;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+  
+    .service-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+    }
+  
+    .service-image {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+    }
+  
+    .service-content {
+      padding: 1.5rem;
+    }
+  
+    .service-title {
+      color: var(--primary);
+      margin-top: 0;
+    }
+  
+    .service-description {
+      margin-bottom: 0;
+    }
+  
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+  
+    .service-card {
+      animation: fadeInUp 0.6s ease forwards;
+      opacity: 0;
+    }
+  
+    .service-card:nth-child(1) { animation-delay: 0.1s; }
+    .service-card:nth-child(2) { animation-delay: 0.2s; }
+    .service-card:nth-child(3) { animation-delay: 0.3s; }
+    .service-card:nth-child(4) { animation-delay: 0.4s; }
+    .service-card:nth-child(5) { animation-delay: 0.5s; }
+    .service-card:nth-child(6) { animation-delay: 0.6s; }
+    .service-card:nth-child(7) { animation-delay: 0.7s; }
+
+    /* Hamburger menu styles */
+    .hamburger-menu {
+        display: none; /* Hidden by default */
+        cursor: pointer;
+        flex-direction: column;
+        justify-content: space-between;
+        width: 30px;
+        height: 21px;
+    }
+
+    .hamburger-menu div {
+        width: 100%;
+        height: 3px;
+        background-color: var(--primary);
+        transition: all 0.3s ease;
+    }
+
+    /* Dropdown menu styles */
+    .dropdown-menu {
+        display: none; /* Hidden by default */
+        position: fixed; /* Cover the whole page */
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(255, 255, 255, 0.95); /* Slightly transparent background */
+        justify-content: center; /* Center items horizontally */
+        align-items: center; /* Center items vertically */
+        z-index: 1001; /* Above everything else */
+        flex-direction: column; /* Stack links vertically */
+        text-align: center; /* Center text */
+    }
+
+    .dropdown-menu.show {
+        display: flex; /* Show when the class "show" is added */
+    }
+
+    .dropdown-menu a {
+        margin: 1rem 0; /* Space out the links */
+        font-size: 1.5rem; /* Increase font size for clarity */
+        color: var(--primary); /* Use primary color */
+    }
+
+    @media (max-width: 768px) {
+        .nav {
+            display: none; /* Hide regular navigation */
+        }
+
+        .hamburger-menu {
+            display: flex; /* Show hamburger menu */
+        }
+        
+        /* Logo at the top left */
+        .logo-container {
+          position: absolute;
+          top: 60px;
+          left: 8px;
+          z-index: 1000;
+          width: 100px;
+          scale: 55%;
+          transition: transform 0.3s ease-in-out;
+          cursor: pointer;
+        }
+    }
+
+  </style>
+</head>
+<body>
+  <!-- Logo Section -->
+  <div class="logo-container">
+    <img src="https://i.postimg.cc/wTrcjZ7f/MMC-transformed.png" alt="Medical Center Logo" id="mainLogo">
+  </div>
+
+  <header class="header">
+    <div class="logo">My Medical Centers</div>
+    <nav class="nav">
+      <a href="index.html">Home</a>
+      <a href="services.html">Our Services</a>
+      <a href="waitlist.html">Join Our Waitlist!</a>
+      <a href="for-professionals.html">For Medical Professionals</a>
+    </nav>
+
+    <!-- Hamburger menu icon for mobile -->
+    <div class="hamburger-menu" id="hamburgerMenu">
+      <div></div>
+      <div></div>
+      <div></div>
+    </div>
+
+    <!-- Dropdown menu for mobile -->
+    <div class="dropdown-menu" id="dropdownMenu">
+      <a href="index.html">Home</a>
+      <a href="services.html">Our Services</a>
+      <a href="waitlist.html">Join Our Waitlist!</a>
+      <a href="for-professionals.html">For Medical Professionals</a>
+    </div>
+  </header>
+
+  <main class="services-container">
+    <h1>Our Services</h1>
+    <div class="services-grid">
+      <div class="service-card">
+        <img src="https://i.postimg.cc/7PzW8jPf/New-Project.png" alt="Walk-In Clinic" class="service-image">
+        <div class="service-content">
+          <h2 class="service-title">Walk-In Clinic</h2>
+          <p class="service-description">Convenient care for non-emergency medical needs without an appointment.</p>
+        </div>
+      </div>
+
+      <div class="service-card">
+        <img src="https://i.postimg.cc/DZYqDvH8/image-2024-10-14-210713793.png" alt="Family Doctor" class="service-image">
+        <div class="service-content">
+          <h2 class="service-title">Family Doctor</h2>
+          <p class="service-description">Comprehensive primary care services for all members of your family.</p>
+        </div>
+      </div>
+
+      <div class="service-card">
+        <img src="https://i.postimg.cc/7LQ8ZRWj/out-0-2.webp" alt="Psychotherapy" class="service-image">
+        <div class="service-content">
+          <h2 class="service-title">Psychotherapy</h2>
+          <p class="service-description">Professional mental health support to improve emotional well-being.</p>
+        </div>
+      </div>
+
+      <div class="service-card">
+        <img src="https://i.postimg.cc/BZjDb1Xz/image-2024-10-14-210805566.png" alt="Addiction Counselling" class="service-image">
+        <div class="service-content">
+          <h2 class="service-title">Addiction Counselling</h2>
+          <p class="service-description">Specialized support for individuals struggling with substance abuse and addiction.</p>
+        </div>
+      </div>
+
+      <div class="service-card">
+        <img src="https://i.postimg.cc/mgf702Z5/image-2024-10-14-210830508.png" alt="Mental Health Workshops" class="service-image">
+        <div class="service-content">
+          <h2 class="service-title">Mental Health Workshops</h2>
+          <p class="service-description">Educational sessions focusing on various mental health topics to empower and support our community.</p>
+        </div>
+      </div>
+
+      <div class="service-card">
+        <img src="https://i.postimg.cc/wjjFWjWY/out-0-3.webp" alt="Massage Therapy" class="service-image">
+        <div class="service-content">
+          <h2 class="service-title">Massage Therapy</h2>
+          <p class="service-description">Therapeutic massage to relieve pain, reduce stress, and promote overall wellness.</p>
+        </div>
+      </div>
+
+      <div class="service-card">
+        <img src="https://i.postimg.cc/N0rn40Mf/out-0-4.webp" alt="Physiotherapy" class="service-image">
+        <div class="service-content">
+          <h2 class="service-title">Physiotherapy</h2>
+          <p class="service-description">Expert care to improve movement, reduce pain, and enhance physical function.</p>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <script>
+    // Hamburger menu functionality
+    const hamburgerMenu = document.getElementById('hamburgerMenu');
+    const dropdownMenu = document.getElementById('dropdownMenu');
+
+    hamburgerMenu.addEventListener('click', () => {
+      dropdownMenu.classList.toggle('show'); // Toggle dropdown visibility
+    });
+
+    // Animation observer for service cards
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.style.animationPlayState = 'running';
+        }
+      });
+    }, {
+      threshold: 0.1
+    });
+
+    document.querySelectorAll('.service-card').forEach(card => {
+      observer.observe(card);
+    });
+  </script>
+</body>
+</html>
