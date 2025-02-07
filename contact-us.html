@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us - My Medical Centers</title>
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+
+    :root {
+      --primary: #0077be;
+      --secondary: #f8fafc;
+      --accent: #ff6b6b;
+      --text: #333;
+      --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    body, html {
+      margin: 0;
+      padding: 0;
+      font-family: 'Poppins', sans-serif;
+      color: var(--text);
+      background-color: var(--secondary);
+      overflow-x: hidden;
+    }
+
+    .header {
+      background-color: white;
+      color: var(--primary);
+      padding: 0.9rem 1rem; /* Reduced padding */
+      position: fixed;
+      width: 100%;
+      z-index: 1100;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: var(--shadow);
+      max-width: 100%;
+      box-sizing: border-box;
+    }
+
+    .logo {
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: var(--primary);
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+    }
+
+    .nav a {
+      color: var(--primary);
+      text-decoration: none;
+      margin-left: 1.5rem;
+      transition: color 0.3s ease;
+      font-weight: 500;
+    }
+
+    .nav a:hover {
+      color: var(--accent);
+    }
+
+    /* Hamburger menu styles */
+    .hamburger-menu {
+      display: none; /* Hidden by default */
+      cursor: pointer;
+      flex-direction: column;
+      justify-content: space-between;
+      width: 30px;
+      height: 21px;
+    }
+
+    .hamburger-menu div {
+      width: 100%;
+      height: 3px;
+      background-color: var(--primary);
+      transition: all 0.3s ease;
+    }
+
+    /* Dropdown menu styles */
+    .dropdown-menu {
+      display: none; /* Hidden by default */
+      position: fixed; /* Cover the whole page */
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(255, 255, 255, 0.95); /* Slightly transparent background */
+      justify-content: center; /* Center items horizontally */
+      align-items: center; /* Center items vertically */
+      z-index: 1001; /* Above everything else */
+      flex-direction: column; /* Stack links vertically */
+      text-align: center; /* Center text */
+    }
+
+    .dropdown-menu.show {
+      display: flex; /* Show when the class "show" is added */
+    }
+
+    .dropdown-menu a {
+      margin: 1rem 0; /* Space out the links */
+      font-size: 1.75rem; /* Increase font size for clarity */
+      color: var(--primary); /* Use primary color */
+    }
+
+    .container {
+      display: flex;
+      justify-content: space-between;
+      padding: 3rem 2rem;
+      max-width: 1200px;
+      margin: 0 auto;
+      margin-top: 80px;
+      gap: 2rem;
+    }
+
+    .map-container, .contact-info {
+      flex: 1;
+      padding: 2rem;
+      border-radius: 10px;
+      box-shadow: var(--shadow);
+      background-color: white;
+    }
+
+    .map-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .contact-info {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .contact-info h2 {
+      margin-top: 0;
+      color: var(--primary);
+    }
+
+    .contact-info p {
+      margin: 0.75em 0;
+      font-size: 1.1rem;
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 768px) {
+      .nav {
+        display: none; /* Hide regular navigation */
+      }
+
+      .hamburger-menu {
+        display: flex; /* Show hamburger menu */
+      }
+
+      .container {
+        flex-direction: column;
+        text-align: center;
+      }
+
+      .map-container, .contact-info {
+        padding: 1.5rem;
+      }
+    }
+
+    .contact-info {
+      background-color: #f9f9f9;
+      border-left: 1px solid #ddd;
+    }
+
+    .contact-info h2 {
+      margin-top: 0;
+    }
+
+    .contact-info p {
+      margin: 0.5em 0;
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 768px) {
+      .nav {
+        display: none; /* Hide regular navigation */
+      }
+
+      .hamburger-menu {
+        display: flex; /* Show hamburger menu */
+      }
+
+      .container {
+        flex-direction: column;
+        text-align: center;
+      }
+
+      .map-container, .contact-info {
+        padding: 1em;
+      }
+    }
+
+    </style>
+</head>
+<body>
+  <header class="header">
+    <div class="logo">My Medical Centers</div>
+    <nav class="nav">
+        <a href="index.html">Home</a>
+        <a href="services.html">Our Services</a>
+        <a href="waitlist.html">Join Our Waitlist!</a>
+        <a href="for-professionals.html" id="navProfessionalButton">For Medical Professionals</a>
+        <a href="contact-us.html">Contact Us!</a> <!-- Added Contact Us link -->
+    </nav>
+
+    <!-- Hamburger menu icon for mobile -->
+    <div class="hamburger-menu" id="hamburgerMenu">
+      <div></div>
+      <div></div>
+      <div></div>
+    </div>
+
+    <!-- Dropdown menu for mobile -->
+    <div class="dropdown-menu" id="dropdownMenu">
+      <a href="index.html">Home</a>
+      <a href="services.html">Our Services</a>
+      <a href="waitlist.html">Join Our Waitlist!</a>
+      <a href="for-professionals.html">For Medical Professionals</a>
+      <a href="contact-us.html">Contact Us!</a>
+    </div>
+  </header>
+
+  <div class="container">
+    <div class="map-container">
+      <iframe
+        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2800.788049035607!2d-75.73893868447632!3d45.3887989791017!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4cce0a6b1842a75b%3A0x28400c540f08b58!2s1081%20Carling%20Ave%2C%20Ottawa%2C%20ON%20K1Y%204G2%2C%20Canada!5e0!3m2!1sen!2sus!4v1696510599782!5m2!1sen!2sus"
+        width="100%"
+        height="450"
+        style="border:0;"
+        allowfullscreen=""
+        loading="lazy"
+        referrerpolicy="no-referrer-when-downgrade">
+      </iframe>
+    </div>
+    <div class="contact-info">
+      <h2>Get in Touch</h2>
+      <p><strong>Email:</strong> info@mymedicalcenters.ca</p>
+      <p><strong>Phone:</strong> 613-252-2412</p>
+      <p><strong>Address:</strong> 1081 Carling Avenue, Unit 507, Ottawa, ON K1Y 4G2</p>
+    </div>
+  </div>
+
+  <script>
+    // Hamburger menu functionality
+    const hamburgerMenu = document.getElementById('hamburgerMenu');
+    const dropdownMenu = document.getElementById('dropdownMenu');
+
+    hamburgerMenu.addEventListener('click', () => {
+      dropdownMenu.classList.toggle('show'); // Toggle dropdown visibility
+    });
+  </script>
+</body>
+</html>
