@@ -232,6 +232,16 @@
           transition: transform 0.3s ease-in-out;
           cursor: pointer;
         }
+
+        .main-content div {
+          flex-direction: column;
+          gap: 1rem;
+        }
+
+        #updateButton, #openFormButton {
+          padding: 0.8rem 1.5rem;
+          font-size: 1.2rem;
+        }
     }
 
   </style>
@@ -243,10 +253,10 @@
     <nav class="nav">
       <a href="index.html">Home</a>
       <a href="services.html">Our Services</a>
+      <a href="waitlist.html">Join Our Waitlist!</a>
       <a href="for-professionals.html">For Medical Professionals</a>
       <a href="contact-us.html">Contact Us!</a>
       <a href="privacy-policy.html">Privacy Policy</a>
-      <a href="new-patients.html">Patient Registration & Update</a>
     </nav>
 
     <!-- Hamburger menu icon for mobile -->
@@ -260,28 +270,76 @@
     <div class="dropdown-menu" id="dropdownMenu">
       <a href="index.html">Home</a>
       <a href="services.html">Our Services</a>
+      <a href="waitlist.html">Join Our Waitlist!</a>
       <a href="for-professionals.html">For Medical Professionals</a>
       <a href="contact-us.html">Contact Us!</a>
       <a href="privacy-policy.html">Privacy Policy</a>
-      <a href="new-patients.html">Patient Registration & Update</a>
     </div>
   </header>
 
   <main class="main-content">
-    <iframe 
-      src="https://ocean.cognisantmd.com/eRequest/19570199-51ba-47a9-b75f-a0a1415e7515" 
-      style="width: 100%; height: 100vh; border: none;" 
-      title="Embedded Form">
-    </iframe>
+    <div style="display: flex; justify-content: center; align-items: center; height: 100vh; gap: 3rem;">
+      <button id="updateButton" style="
+        padding: 1rem 2rem;
+        font-size: 1.5rem;
+        color: white;
+        background-color: var(--primary);
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+      ">
+        Update
+      </button>
+      <button id="openFormButton" style="
+        padding: 1rem 2rem;
+        font-size: 1.5rem;
+        color: white;
+        background-color: var(--primary);
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+      ">
+        New Patient Registration
+      </button>
+    </div>
   </main>
 
   <script>
-    // Hamburger menu functionality
-    const hamburgerMenu = document.getElementById('hamburgerMenu');
-    const dropdownMenu = document.getElementById('dropdownMenu');
+    const openFormButton = document.getElementById('openFormButton');
+    const updateButton = document.getElementById('updateButton');
 
-    hamburgerMenu.addEventListener('click', () => {
-      dropdownMenu.classList.toggle('show'); // Toggle dropdown visibility
+    let scale = 1;
+    let growing = true;
+
+    function animateButtons() {
+      if (growing) {
+        scale += 0.005;
+        if (scale >= 1.2) growing = false;
+      } else {
+        scale -= 0.005;
+        if (scale <= 1) growing = true;
+      }
+      openFormButton.style.transform = `scale(${scale})`;
+      updateButton.style.transform = `scale(${scale})`;
+      requestAnimationFrame(animateButtons);
+    }
+
+    animateButtons();
+
+    updateButton.addEventListener('click', () => {
+      window.open(
+        'https://ocean.cognisantmd.com/intake/IntakePortal.html?eReqRef=19570199-51ba-47a9-b75f-a0a1415e7515',
+        '_blank'
+      );
+    });
+
+    openFormButton.addEventListener('click', () => {
+      window.open(
+        'https://ocean.cognisantmd.com/eRequest/19570199-51ba-47a9-b75f-a0a1415e7515',
+        '_blank'
+      );
     });
   </script>
 </body>
