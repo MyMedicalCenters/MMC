@@ -353,11 +353,22 @@
     </div>
   </div>
 
+  <!-- Announcement Popup -->
+  <div class="popup-overlay" id="announcementPopup">
+    <div class="popup">
+      <h2 style="color: var(--accent); font-weight: bold;">Important!</h2>
+      <p style="font-weight: bold; font-size: 1.2rem;">We are accepting walk-in all day (from 9 am to 5 pm)</p>
+      <button class="button clients" id="closeAnnouncementBtn">OK</button>
+    </div>
+  </div>
+
   <script>
     const video = document.getElementById('mainVideo');
     const playPauseBtn = document.getElementById('playPauseBtn');
     const endButtons = document.getElementById('endButtons');
     const popupOverlay = document.getElementById('popupOverlay');
+    const announcementPopup = document.getElementById('announcementPopup');
+    const closeAnnouncementBtn = document.getElementById('closeAnnouncementBtn');
 
     // Show popup on page load
     window.addEventListener('load', () => {
@@ -367,14 +378,18 @@
     // Play video with sound when "For Clients" is clicked
     document.getElementById('clientButton').addEventListener('click', () => {
       popupOverlay.classList.remove('show');
-      video.muted = false;
-      video.play();
-      playPauseBtn.innerHTML = '❚❚';
+      announcementPopup.classList.add('show');
     });
 
     // Redirect to "for-professionals.html" when the "I'm a Medical Professional" button is clicked
-    document.getElementById('popupProfessionalButton').addEventListener('click', () => {
-      window.location.href = 'for-professionals.html';
+    document.getElementById('popupProfessionalButton').addEventListener('click', (e) => {
+      e.preventDefault();
+      popupOverlay.classList.remove('show');
+      announcementPopup.classList.add('show');
+      // After a short delay, redirect
+      setTimeout(() => {
+        window.location.href = 'for-professionals.html';
+      }, 2000);
     });
 
     // Redirect to "for-professionals.html" when the navigation link is clicked
@@ -420,6 +435,15 @@
 
     document.getElementById('joinWaitlistBtn').addEventListener('click', () => {
       window.location.href = 'new-patients.html';
+    });
+
+    // Close announcement popup for patients
+    closeAnnouncementBtn.addEventListener('click', () => {
+      announcementPopup.classList.remove('show');
+      // For patients, play video, unmute, etc.
+      video.muted = false;
+      video.play();
+      playPauseBtn.innerHTML = '❚❚';
     });
 
      // Hamburger menu functionality
