@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Appointment - Patient Registration & Update</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+    :root {
+      --primary: #0077be;
+      --secondary: #f0f8ff;
+      --accent: #ff6b6b;
+      --text: #333;
+    }
+    body, html {
+      margin: 0;
+      padding: 0;
+      font-family: 'Poppins', sans-serif;
+      color: var(--text);
+      overflow-x: hidden;
+    }
+    .main-content {
+      padding: 2rem;
+      margin-top: 20px;
+      font-size: 1rem;
+      line-height: 1.6;
+      color: #333;
+    }
+    /*logo at the top left */
+    .logo-container {
+      position: absolute;
+      top: 100px;
+      left: 30px;
+      z-index: 1000;
+      width: 100px;
+      scale: 125%;
+      transition: transform 0.3s ease-in-out;
+      cursor: pointer;
+    }
+    .logo-container img {
+      width: 100%;
+      height: auto;
+    }
+    .logo-container:hover {
+      transform: scale(1.1);
+    }
+    .logo-container:active {
+      transform: scale(1.2);
+    }
+    .header {
+      background-color: white;
+      color: var(--primary);
+      padding: 1rem;
+      position: fixed;
+      width: 100%;
+      z-index: 1001;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      max-width: 100%;
+      box-sizing: border-box;
+      overflow: hidden;
+    }
+    .logo {
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: var(--primary);
+    }
+    .nav {
+      display: flex;
+      align-items: center;
+    }
+    .nav a {
+      color: var(--primary);
+      text-decoration: none;
+      margin-left: 1rem;
+      transition: color 0.3s ease;
+      font-weight: 400;
+    }
+    .nav a:hover {
+      color: var(--accent);
+    }
+    .nav a.waitlist-link {
+      color: red !important;
+      font-weight: 600;
+    }
+    h1 {
+      color: var(--primary);
+      text-align: center;
+      margin-bottom: 2rem;
+      font-size: 2.5rem;
+    }
+    .popup-overlay {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.5);
+      justify-content: center;
+      align-items: center;
+      z-index: 1002;
+    }
+    .popup-overlay.show {
+      display: flex;
+    }
+    .popup {
+      background-color: white;
+      padding: 2rem;
+      border-radius: 10px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      text-align: center;
+    }
+    .popup h2 {
+      margin-top: 0;
+      color: var(--primary);
+    }
+    .popup p {
+      margin-bottom: 1.5rem;
+    }
+    .popup .end-button {
+      padding: 1rem 2rem;
+      font-size: 1.2rem;
+      color: white;
+      background-color: var(--primary);
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      margin: 0.5rem;
+    }
+    .popup .end-button:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+    }
+    .patient-buttons {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 4rem;
+      margin-top: 2rem;
+      height: 60vh;
+    }
+    .patient-buttons button {
+      padding: 1rem 2rem;
+      font-size: 1.5rem;
+      color: white;
+      background-color: var(--primary);
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .patient-buttons button:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+    }
+    @media (max-width: 768px) {
+      .nav {
+        display: none;
+      }
+      .logo-container {
+        position: absolute;
+        top: 60px;
+        left: 8px;
+        z-index: 1000;
+        width: 100px;
+        scale: 0%;
+        transition: transform 0.3s ease-in-out;
+        cursor: pointer;
+      }
+      .patient-buttons {
+        flex-direction: column;
+        gap: 1rem;
+        height: auto;
+      }
+      h1 {
+        font-size: 2rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <header class="header">
+    <div class="logo">My Medical Centers</div>
+    <nav class="nav">
+      <a href="index.html">Home</a>
+      <a href="services.html">Our Services</a>
+      <a href="for-professionals.html">For Medical Professionals</a>
+      <a href="contact-us.html">Contact Us!</a>
+      <a href="privacy-policy.html">Privacy Policy</a>
+      <a href="new-patients.html">Patient Registration & Update</a>
+      <a href="waitlist.html" class="waitlist-link">Join Our Waitlist!</a>
+    </nav>
+  </header>
+
+  <!-- Logo Section -->
+  <div class="logo-container">
+    <img src="https://i.postimg.cc/wTrcjZ7f/MMC-transformed.png" alt="Medical Center Logo" id="mainLogo">
+  </div>
+
+  <!-- Health Card Type Popup -->
+  <div class="popup-overlay" id="healthCardPopupOverlay">
+    <div class="popup">
+      <h2>Health Card Type</h2>
+      <p>Do you have a provincial health card (OHIP, RAMQ, AHCIP, MSP, MSI, etc...) or a non-provincial health coverage (UHIP, Brown card (RPCD), Refugee (IFHP), etc...)?</p>
+      <button class="end-button" id="provincialBtn">Provincial Health Coverage</button>
+      <button class="end-button" id="nonProvincialBtn">Non-Provincial Health Coverage</button>
+    </div>
+  </div>
+
+  <!-- Main Content (hidden until popup is closed) -->
+  <main class="main-content" id="mainContent" style="display:none;">
+    <h1>Book Appointment Now!</h1>
+    <div class="patient-buttons">
+      <button id="existingPatientBtn">Existing Patient</button>
+      <button id="newPatientBtn">New Patient Registration</button>
+    </div>
+  </main>
+
+  <script>
+    // Show popup on page load and animate patient buttons
+    window.addEventListener('DOMContentLoaded', function() {
+      var healthCardPopup = document.getElementById('healthCardPopupOverlay');
+      var mainContent = document.getElementById('mainContent');
+      if (healthCardPopup) healthCardPopup.classList.add('show');
+      var provincialBtn = document.getElementById('provincialBtn');
+      var nonProvincialBtn = document.getElementById('nonProvincialBtn');
+      if (provincialBtn) {
+        provincialBtn.onclick = function() {
+          healthCardPopup.classList.remove('show');
+          if (mainContent) mainContent.style.display = '';
+          // Hide the waitlist link in the header
+          var waitlistLink = document.querySelector('.waitlist-link');
+          if (waitlistLink) waitlistLink.style.display = 'none';
+        };
+      }
+      if (nonProvincialBtn) {
+        nonProvincialBtn.onclick = function() {
+          window.location.href = 'https://ocean.cognisantmd.com/online-booking/341f072e-411a-4b7a-9966-1d16966af184';
+        };
+      }
+      // Patient buttons
+      var existingPatientBtn = document.getElementById('existingPatientBtn');
+      var newPatientBtn = document.getElementById('newPatientBtn');
+      let scale = 1;
+      let growing = true;
+      function animateButtons() {
+        if (growing) {
+          scale += 0.005;
+          if (scale >= 1.2) growing = false;
+        } else {
+          scale -= 0.005;
+          if (scale <= 1) growing = true;
+        }
+        if (existingPatientBtn) existingPatientBtn.style.transform = `scale(${scale})`;
+        if (newPatientBtn) newPatientBtn.style.transform = `scale(${scale})`;
+        requestAnimationFrame(animateButtons);
+      }
+      animateButtons();
+      if (existingPatientBtn) {
+        existingPatientBtn.onclick = function() {
+          window.open('https://ocean.cognisantmd.com/online-booking/aab018ee-f6c3-4a83-9ee7-5998c7963c22', '_blank');
+        };
+      }
+      if (newPatientBtn) {
+        newPatientBtn.onclick = function() {
+          window.open('https://ocean.cognisantmd.com/online-booking/341f072e-411a-4b7a-9966-1d16966af184', '_blank');
+        };
+      }
+    });
+  </script>
+</body>
+</html>
