@@ -381,7 +381,7 @@
     <nav class="nav">
       <a href="index.html">Home</a>
       <a href="services.html">Our Services</a>
-      <a href="for-professionals.html" id="navProfessionalButton">For Medical Professionals</a>
+  <a href="WHealth.html" id="navProfessionalButton">Women's Health Clinic</a>
       <a href="new-patients.html">Patient Registration & Update</a>
       <a href="contact-us.html">Contact Us!</a>
       <a href="privacy-policy.html">Privacy Policy</a>
@@ -398,11 +398,11 @@
     <div class="dropdown-menu" id="dropdownMenu">
       <a href="index.html">Home</a>
       <a href="services.html">Our Services</a>
-      <a href="for-professionals.html">For Medical Professionals</a>
+  <a href="WHealth.html">Women's Health Clinic</a>
       <a href="new-patients.html">Patient Registration & Update</a>
       <a href="contact-us.html">Contact Us!</a>
       <a href="privacy-policy.html">Privacy Policy</a>
-      <a href="appointment.html" class="book-appointment-btn">Book Appointment Now!</a>
+      <button onclick="window.open('https://ocean.cognisantmd.com/online-booking/aab018ee-f6c3-4a83-9ee7-5998c7963c22','_blank')" class="book-appointment-btn" style="display:inline-flex; margin-top:1.5rem; width:auto; font-size:1.2rem;">Book Appointment Now!</button>
     </div>
   </header>
 
@@ -425,9 +425,9 @@
   <div class="popup-overlay" id="popupOverlay">
     <div class="popup">
       <h2>Welcome to My Medical Centers</h2>
-      <p>Please select who you are:</p>
-      <button class="button professionals" id="popupProfessionalButton">I'm a Medical Professional</button>
-      <button class="button clients" id="clientButton">I'm a Patient</button>
+      <p>Please select a service:</p>
+      <button class="button professionals" id="popupProfessionalButton">Women's Health Clinic</button>
+      <button class="button clients" id="clientButton">Family Doctor/Walk-in</button>
     </div>
   </div>
 
@@ -435,7 +435,7 @@
   <div class="popup-overlay" id="announcementPopup">
     <div class="popup">
       <h2 style="color: var(--accent); font-weight: bold;">Important!</h2>
-      <p style="font-weight: bold; font-size: 1.2rem;">We are accepting walk-in weekdays from 9am to 5pm and Saturdays from 9am to 1pm</p>
+      <p style="font-weight: bold; font-size: 1.2rem;">We are accepting walk-in all day (from 9 am to 5 pm)</p>
       <button class="button clients" id="closeAnnouncementBtn">OK</button>
     </div>
   </div>
@@ -459,21 +459,21 @@
       announcementPopup.classList.add('show');
     });
 
-    // Redirect to "for-professionals.html" when the "I'm a Medical Professional" button is clicked
+  // Redirect to "WHealth.html" when the "Women's Health Clinic" button is clicked
     document.getElementById('popupProfessionalButton').addEventListener('click', (e) => {
       e.preventDefault();
       popupOverlay.classList.remove('show');
       announcementPopup.classList.add('show');
       // After a short delay, redirect
       setTimeout(() => {
-        window.location.href = 'for-professionals.html';
+  window.location.href = 'WHealth.html';
       }, 2000);
     });
 
-    // Redirect to "for-professionals.html" when the navigation link is clicked
+  // Redirect to "WHealth.html" when the navigation link is clicked
     document.getElementById('navProfessionalButton').addEventListener('click', (event) => {
       event.preventDefault();
-      window.location.href = 'for-professionals.html';
+  window.location.href = 'WHealth.html';
     });
 
     // Toggle play/pause with the button
