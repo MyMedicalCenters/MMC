@@ -138,6 +138,19 @@
       margin-top: 2.5rem;
       font-size: 1.1rem;
     }
+    .referral-section {
+      margin-top: 2rem;
+      background: #fbfcfe;
+      border: 1px solid rgba(0,0,0,0.04);
+      padding: 1rem;
+      border-radius: 10px;
+    }
+    .pdf-embed {
+      margin-top: 0.8rem;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+      border-radius: 8px;
+      overflow: hidden;
+    }
     @media (max-width: 768px) {
       .main-content {
         margin: 120px 0 0 0;
@@ -261,6 +274,14 @@
     <h1>Women's Health Clinic<br><span style="font-size:1.3rem;font-weight:400;">with Dr. Keiko Chan & RM Summer O’Neill</span></h1>
   <!-- Replace the image file at ./images/keiko_summer.jpg with your photo of Keiko and Summer -->
   <img src="https://i.postimg.cc/3wbWj0DQ/image0.jpg" alt="Dr. Keiko Chan and RM Summer O'Neill" class="photo-placeholder">
+    <!-- Referral form download-only (moved here so it appears under the image) -->
+    <div class="referral-section" id="referralSection">
+      <h2>Referral & New Patient Form</h2>
+      <p>Please download, print, and complete the form. Click the button below to download the PDF.</p>
+      <p style="text-align:center; margin-top:0.8rem;">
+        <a href="merged2.pdf" download class="book-appointment-btn" style="border-radius:8px; padding:0.55rem 0.9rem; margin:0 auto; display:inline-block;">Download / Print Referral Form</a>
+      </p>
+    </div>
     <h2>What Conditions We See</h2>
     <ul>
       <li>Pap smear/HPV testing</li>
