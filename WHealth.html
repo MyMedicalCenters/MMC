@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Women's Health Clinic - Dr. Keiko Chan & RM Summer O’Neill</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+    :root {
+      --primary: #0077be;
+      --secondary: #f0f8ff;
+      --accent: #ff6b6b;
+      --text: #333;
+    }
+    body, html {
+      margin: 0;
+      padding: 0;
+      font-family: 'Poppins', sans-serif;
+      color: var(--text);
+      background-color: var(--secondary);
+      overflow-x: hidden;
+    }
+    .header {
+      background-color: white;
+      color: var(--primary);
+      padding: 0.4rem 1rem; /* slightly smaller to reduce header height */
+      position: fixed;
+      width: 100%;
+      z-index: 1100;
+      display: flex;
+      justify-content: center; /* center header content horizontally */
+      align-items: center;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      max-width: 100%;
+      box-sizing: border-box;
+      overflow: hidden;
+    }
+    .logo {
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: var(--primary);
+      line-height: 1;
+      margin-right: 1.5rem;
+    }
+    .nav {
+      display: flex;
+      align-items: center;
+      margin-left: 0;
+      width: 100%;
+      justify-content: center;
+      position: relative;
+    }
+    .nav a {
+      color: var(--primary);
+      text-decoration: none;
+      margin-left: 1.2rem; /* slightly larger spacing */
+      margin-right: 0;
+      font-size: 0.97rem;
+      transition: color 0.3s ease;
+      font-weight: 400;
+      line-height: 1;
+      padding: 0;
+    }
+    .nav a:first-child {
+      position: absolute;
+      left: 0;
+      margin-left: 0;
+    }
+    .nav a:hover {
+      color: var(--accent);
+    }
+    .logo-container {
+      position: absolute;
+      top: 85px;
+      left: 27px;
+      z-index: 1100;
+      width: 100px;
+      transition: transform 0.3s ease-in-out;
+      cursor: pointer;
+    }
+    .logo-container img {
+      width: 100%;
+      height: auto;
+    }
+    .logo-container:hover {
+      transform: scale(1.1);
+    }
+    .logo-container:active {
+      transform: scale(1.2);
+    }
+    .main-content {
+      padding: 2.5rem 1.5rem 2rem 1.5rem;
+      max-width: 900px;
+      margin: 120px auto 0 auto; /* pulled up to reduce perceived header height */
+      background: #fff;
+      border-radius: 12px;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.07);
+    }
+    h1 {
+      color: var(--primary);
+      text-align: center;
+      margin-bottom: 1.5rem;
+      font-size: 2.5rem;
+    }
+    h2 {
+      color: var(--primary);
+      margin-top: 2.5rem;
+      margin-bottom: 1rem;
+    }
+    ul {
+      margin-left: 1.5rem;
+      margin-bottom: 1.5rem;
+    }
+    .bio-section {
+      margin-bottom: 2.5rem;
+    }
+    .bio {
+      background: var(--secondary);
+      border-left: 4px solid var(--primary);
+      padding: 1.2rem 1.5rem;
+      border-radius: 8px;
+      margin-bottom: 1.5rem;
+    }
+    .photo-placeholder {
+      width: 180px;
+      height: 180px;
+      border-radius: 50%;
+      display: block;
+      margin: 0 auto 2rem auto;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+      object-fit: cover; /* ensures the image fills the circle */
+    }
+    .contact-box {
+      background: var(--secondary);
+      border-left: 4px solid var(--accent);
+      padding: 1.2rem 1.5rem;
+      border-radius: 8px;
+      margin-top: 2.5rem;
+      font-size: 1.1rem;
+    }
+    @media (max-width: 768px) {
+      .main-content {
+        margin: 120px 0 0 0;
+        padding: 1rem 0.5rem;
+      }
+      .logo-container {
+        top: 60px;
+        left: 8px;
+        width: 80px;
+      }
+      h1 {
+        font-size: 2rem;
+      }
+    }
+    /* Hamburger menu and dropdown (mobile) */
+    .hamburger-menu {
+      display: none; /* Hidden by default, shown on small screens */
+      cursor: pointer;
+      flex-direction: column;
+      justify-content: space-between;
+      width: 30px;
+      height: 21px;
+    }
+
+    .hamburger-menu div {
+      width: 100%;
+      height: 3px;
+      background-color: var(--primary);
+      transition: all 0.3s ease;
+    }
+
+    .dropdown-menu {
+      display: none; /* Hidden by default */
+      position: fixed; /* Cover the whole page */
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(255, 255, 255, 0.97);
+      justify-content: center; /* Center items horizontally */
+      align-items: center; /* Center items vertically */
+      z-index: 1200; /* Above header */
+      flex-direction: column; /* Stack links vertically */
+      text-align: center; /* Center text */
+    }
+
+    .dropdown-menu.show {
+      display: flex; /* Show when toggled */
+    }
+
+    .dropdown-menu a {
+      margin: 1rem 0; /* Space out the links */
+      font-size: 1.4rem; /* Larger for touch */
+      color: var(--primary);
+      text-decoration: none;
+    }
+
+    .book-appointment-btn {
+      background-color: #5fa1bc;
+      color: #fff;
+      padding: 0.18rem 0.7rem; /* compact vertical padding like index.html */
+      border-radius: 15px;
+      font-size: 0.93rem;
+      border: none;
+      cursor: pointer;
+      margin-left: 1.5rem;
+      text-decoration: none;
+      font-weight: 600;
+      display: inline-flex;
+      align-items: center;
+      height: 28px;
+      line-height: 1;
+      box-shadow: 0 2px 8px rgba(95,161,188,0.08);
+      white-space: nowrap;
+    }
+
+    @media (max-width: 768px) {
+      .nav { display: none; }
+      .hamburger-menu { display: flex; }
+  .book-appointment-btn { display: none !important; }
+  /* But keep the booking button visible inside the dropdown menu */
+  .dropdown-menu button.book-appointment-btn { display: inline-flex !important; }
+    }
+  </style>
+</head>
+<body>
+  <!-- Logo Section -->
+  <div class="logo-container">
+    <img src="https://i.postimg.cc/wTrcjZ7f/MMC-transformed.png" alt="Medical Center Logo" id="mainLogo">
+  </div>
+  <header class="header">
+    <div class="logo">My Medical Centers</div>
+    <nav class="nav">
+      <a href="index.html">Home</a>
+      <a href="services.html">Our Services</a>
+  <a href="WHealth.html">Women's Health Clinic</a>
+      <a href="contact-us.html">Contact Us!</a>
+      <a href="privacy-policy.html">Privacy Policy</a>
+      <a href="new-patients.html">Patient Registration & Update</a>
+    </nav>
+    <a href="appointment.html" class="book-appointment-btn">Book Appointment Now!</a>
+    <!-- Hamburger menu for mobile -->
+    <div class="hamburger-menu" id="hamburgerMenu">
+      <div></div>
+      <div></div>
+      <div></div>
+    </div>
+
+    <!-- Dropdown menu for mobile -->
+    <div class="dropdown-menu" id="dropdownMenu">
+      <a href="index.html">Home</a>
+      <a href="services.html">Our Services</a>
+  <a href="WHealth.html">Women's Health Clinic</a>
+      <a href="new-patients.html">Patient Registration & Update</a>
+      <a href="contact-us.html">Contact Us!</a>
+      <a href="privacy-policy.html">Privacy Policy</a>
+      <button onclick="window.open('https://ocean.cognisantmd.com/online-booking/aab018ee-f6c3-4a83-9ee7-5998c7963c22','_blank')" class="book-appointment-btn" style="margin-top:1.5rem; width:auto; font-size:1.1rem;">Book Appointment Now!</button>
+    </div>
+  </header>
+  <main class="main-content">
+    <h1>Women's Health Clinic<br><span style="font-size:1.3rem;font-weight:400;">with Dr. Keiko Chan & RM Summer O’Neill</span></h1>
+  <!-- Replace the image file at ./images/keiko_summer.jpg with your photo of Keiko and Summer -->
+  <img src="https://i.postimg.cc/3wbWj0DQ/image0.jpg" alt="Dr. Keiko Chan and RM Summer O'Neill" class="photo-placeholder">
+    <h2>What Conditions We See</h2>
+    <ul>
+      <li>Pap smear/HPV testing</li>
+      <li>Contraceptive Consultations (Pills, patches, rings, IUDs, Nexplanon) with pain management if applicable (cervical nerve blocks, inhaled Penthrox, and anxiolytic medications are options for IUDs)</li>
+      <li>Menstrual Consultations (irregular menses, painful menses, heavy menses, PCOS, endometriosis, adenomyosis)</li>
+      <li>Medical Abortion &lt;10 weeks</li>
+      <li>Endometrial biopsy (for investigating post-menopausal bleeding)</li>
+      <li>Peri/Menopause Consultations (hormone and non-hormonal options)</li>
+      <li>Severe menstrual mood disorders (Premenstrual Dysphoric Disorder, a.k.a. PMDD)</li>
+    </ul>
+    <div class="bio-section">
+      <!-- Removed duplicate services/bio block per user request -->
+      <h2>About Dr. Keiko Chan</h2>
+      <div class="bio">
+        Dr. Keiko Chan completed medical school in Calgary, then moved to Ottawa for her residency in Family Medicine. Throughout residency, she focused on women’s health, working at the Shirley E Greenberg Center twice weekly. Upon graduation, Dr. Chan continued to explore women’s health for patients of all ages, ranging from contraception to menopause care. She is passionate about making procedures such as IUD insertions, endometrial biopsies, or even pap/HPV smears as comfortable as possible in the outpatient setting. At pre-procedure consultations, both Dr. Chan and RM Summer O’Neill present patients with pain management options including cervical nerve blocks, inhaled Penthrox, and anxiolytic medications. Dr. Chan is also active in the Ottawa community, often giving public talks on evidence-based medicine in perimenopause and menopause. She is also pursuing her Menopause Society Certified Practitioner (MSCP) status with The Menopause Society and hopes to become certified in late October 2025. Over the past year, Dr. Chan has collaborated with RM Summer O’Neill to be able to bring timely care to her patients.
+      </div>
+      <h2>About RM Summer O’Neill</h2>
+      <div class="bio">
+        Summer O’Neill started her career in gynecology and women's health as a midwife. She quickly became interested in serving women outside of pregnancy and became a trained expert in gynecology. She strives to support those with reproductive organs through their stages and phases of life. She is passionate about offering kind gynecological care especially for people who have had bad experiences in the past. She works at Ottawa hospital in the complex gynecology clinic there as a Minimally Invasive Gyne Surgeon Clinical Associate. At this clinic, she specializes in endometriosis care and heavy menstrual bleeding. She is delighted to be expanding her practice to now work alongside Dr. Keiko Chan serving a lovely new population of patients. Summer is also studying for her Menopause Society Certified Practitioner (MSCP) exam with The Menopause Society. She lives in the Gatineau Hills and will often bike to work, loves playing pickle ball, and lifting weights.
+      </div>
+    </div>
+    <div class="contact-box">
+      <strong>Contact for Referrals & Questions:</strong><br>
+      Referrals Coordinator: <a href="mailto:WHealth@mymedicalcenters.ca">WHealth@mymedicalcenters.ca</a><br>
+      Phone: 613-907-4455
+    </div>
+  </main>
+  <script>
+    // Hamburger toggle (mobile dropdown)
+    const hamburgerMenu = document.getElementById('hamburgerMenu');
+    const dropdownMenu = document.getElementById('dropdownMenu');
+
+    if (hamburgerMenu && dropdownMenu) {
+      hamburgerMenu.addEventListener('click', () => {
+        dropdownMenu.classList.toggle('show');
+      });
+    }
+  </script>
+</body>
+</html>
