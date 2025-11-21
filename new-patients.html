@@ -389,6 +389,21 @@
     <div class="popup">
       <h2>Select Location</h2>
       <p>Please choose the location you are attending:</p>
+      <div style="text-align:left; margin: 1rem 0;">
+        <strong>Carling:</strong>
+        <ul style="margin-top:0.5rem; margin-bottom:0.75rem;">
+          <li>Dr Shegun Momodu</li>
+          <li>Dr Siyoung Lee (walk-in)</li>
+        </ul>
+
+        <strong>Richmond:</strong>
+        <ul style="margin-top:0.5rem; margin-bottom:0.75rem;">
+          <li>Dr Alex Carrington</li>
+          <li>Dr Sydney Chinagorom</li>
+          <li>Dr Nsikak Usoroh</li>
+          <li>Dr Chesda Bun (walk-in)</li>
+        </ul>
+      </div>
       <button class="end-button" id="carlingBtn">Carling</button>
       <button class="end-button" id="richmondBtn">Richmond</button>
     </div>
@@ -457,7 +472,8 @@
     });
 
     // Show location -> health-card popup sequence on new-patients.html only
-    if (window.location.pathname.includes('new-patients.html')) {
+    // Also allow the popup when opening this local file directly (handles spaces/encoding)
+    if (window.location.pathname.includes('new-patients.html') || decodeURIComponent(window.location.pathname).toLowerCase().includes('fixed patient link.html')) {
       window.addEventListener('DOMContentLoaded', function() {
         var locationPopup = document.getElementById('locationPopupOverlay');
         var healthCardPopup = document.getElementById('healthCardPopupOverlay');
