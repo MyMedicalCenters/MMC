@@ -384,6 +384,16 @@
   </main>
 
   <!-- Popup for Health Card Type -->
+  <!-- Popup for Location Selection (Carling vs Richmond) -->
+  <div class="popup-overlay" id="locationPopupOverlay">
+    <div class="popup">
+      <h2>Select Location</h2>
+      <p>Please choose the location you are attending:</p>
+      <button class="end-button" id="carlingBtn">Carling</button>
+      <button class="end-button" id="richmondBtn">Richmond</button>
+    </div>
+  </div>
+
   <div class="popup-overlay" id="healthCardPopupOverlay">
     <div class="popup">
       <h2>Health Card Type</h2>
@@ -402,6 +412,14 @@
     let scale = 1;
     let growing = true;
 
+    // Booking URLs
+    const RICHMOND_EXISTING = 'https://ocean.cognisantmd.com/online-booking/aab018ee-f6c3-4a83-9ee7-5998c7963c22';
+    const RICHMOND_NEW = 'https://ocean.cognisantmd.com/online-booking/341f072e-411a-4b7a-9966-1d16966af184';
+    const CARLING_BOOKING = 'https://ocean.cognisantmd.com/online-booking/a7eb5850-834a-4bab-8e1d-11701aa8790e';
+    const RICHMOND_NONPROV_REDIRECT = 'https://ocean.cognisantmd.com/intake/patients.html?linkRef=341f072e-411a-4b7a-9966-1d16966af184#/online-booking';
+
+    let selectedLocation = null; // 'carling' or 'richmond'
+
     function animateButtons() {
       if (growing) {
         scale += 0.005;
@@ -417,41 +435,74 @@
 
     animateButtons();
 
+    // Buttons open different URLs depending on the selected location.
     updateButton.addEventListener('click', () => {
-      window.open(
-        'https://ocean.cognisantmd.com/online-booking/aab018ee-f6c3-4a83-9ee7-5998c7963c22',
-        '_blank'
-      );
+      if (selectedLocation === 'carling') {
+        window.open(CARLING_BOOKING, '_blank');
+      } else {
+        window.open(RICHMOND_EXISTING, '_blank');
+      }
     });
 
     openFormButton.addEventListener('click', () => {
-      window.open(
-        'https://ocean.cognisantmd.com/online-booking/341f072e-411a-4b7a-9966-1d16966af184',
-        '_blank'
-      );
+      if (selectedLocation === 'carling') {
+        window.open(CARLING_BOOKING, '_blank');
+      } else {
+        window.open(RICHMOND_NEW, '_blank');
+      }
     });
 
     hamburgerMenu.addEventListener('click', () => {
       dropdownMenu.classList.toggle('show');
     });
 
-    // Show health card popup on new-patients.html only
+    // Show location -> health-card popup sequence on new-patients.html only
     if (window.location.pathname.includes('new-patients.html')) {
       window.addEventListener('DOMContentLoaded', function() {
+        var locationPopup = document.getElementById('locationPopupOverlay');
         var healthCardPopup = document.getElementById('healthCardPopupOverlay');
-        if (healthCardPopup) healthCardPopup.classList.add('show');
+        var carlingBtn = document.getElementById('carlingBtn');
+        var richmondBtn = document.getElementById('richmondBtn');
         var provincialBtn = document.getElementById('provincialBtn');
         var nonProvincialBtn = document.getElementById('nonProvincialBtn');
         var waitlistLink = document.querySelector('.waitlist-link');
-        if (provincialBtn) {
-          provincialBtn.onclick = function() {
-            healthCardPopup.classList.remove('show');
-            if (waitlistLink) waitlistLink.style.display = 'none';
+
+        // Show the location selection first
+        if (locationPopup) locationPopup.classList.add('show');
+
+        if (carlingBtn) {
+          carlingBtn.onclick = function() {
+            selectedLocation = 'carling';
+            if (locationPopup) locationPopup.classList.remove('show');
+            if (healthCardPopup) healthCardPopup.classList.add('show');
           };
         }
+
+        if (richmondBtn) {
+          richmondBtn.onclick = function() {
+            selectedLocation = 'richmond';
+            if (locationPopup) locationPopup.classList.remove('show');
+            if (healthCardPopup) healthCardPopup.classList.add('show');
+          };
+        }
+
+        if (provincialBtn) {
+          provincialBtn.onclick = function() {
+            if (healthCardPopup) healthCardPopup.classList.remove('show');
+            if (waitlistLink) waitlistLink.style.display = 'none';
+            // For 'carling' we keep selectedLocation so the buttons open the Carling booking.
+          };
+        }
+
         if (nonProvincialBtn) {
           nonProvincialBtn.onclick = function() {
-            window.location.href = 'https://ocean.cognisantmd.com/intake/patients.html?linkRef=341f072e-411a-4b7a-9966-1d16966af184#/online-booking';
+            if (selectedLocation === 'carling') {
+              // Carling non-provincial: go to the Carling booking link
+              window.location.href = CARLING_BOOKING;
+            } else {
+              // Richmond non-provincial: keep existing behavior (redirect to intake patients page)
+              window.location.href = RICHMOND_NONPROV_REDIRECT;
+            }
           };
         }
       });
