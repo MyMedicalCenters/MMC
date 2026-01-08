@@ -202,6 +202,31 @@
     <img src="https://i.postimg.cc/wTrcjZ7f/MMC-transformed.png" alt="Medical Center Logo" id="mainLogo">
   </div>
 
+  <!-- Location Selection Popup (added) -->
+  <div class="popup-overlay" id="locationPopupOverlay">
+    <div class="popup">
+      <h2>Select Location</h2>
+      <p>Please choose the location you are attending:</p>
+      <div style="text-align:left; margin: 1rem 0;">
+        <strong>Carling:</strong>
+        <ul style="margin-top:0.5rem; margin-bottom:0.75rem;">
+          <li>Dr Shegun Momodu</li>
+          <li>Dr Siyoung Lee (walk-in)</li>
+        </ul>
+
+        <strong>Richmond:</strong>
+        <ul style="margin-top:0.5rem; margin-bottom:0.75rem;">
+          <li>Dr Alex Carrington</li>
+          <li>Dr Sydney Chinagorom</li>
+          <li>Dr Nsikak Usoroh</li>
+          <li>Dr Chesda Bun (walk-in)</li>
+        </ul>
+      </div>
+      <button class="end-button" id="carlingBtn">Carling</button>
+      <button class="end-button" id="richmondBtn">Richmond</button>
+    </div>
+  </div>
+
   <!-- Health Card Type Popup -->
   <div class="popup-overlay" id="healthCardPopupOverlay">
     <div class="popup">
@@ -222,30 +247,65 @@
   </main>
 
   <script>
-    // Show popup on page load and animate patient buttons
+    // Booking URLs
+    const RICHMOND_EXISTING = 'https://ocean.cognisantmd.com/online-booking/fc6b34ea-8362-46ec-a106-660f8c1c5a79';
+    const RICHMOND_NEW = 'https://ocean.cognisantmd.com/online-booking/341f072e-411a-4b7a-9966-1d16966af184';
+    const CARLING_BOOKING = 'https://ocean.cognisantmd.com/online-booking/a7eb5850-834a-4bab-8e1d-11701aa8790e';
+    const RICHMOND_NONPROV_REDIRECT = 'https://ocean.cognisantmd.com/intake/patients.html?linkRef=341f072e-411a-4b7a-9966-1d16966af184#/online-booking';
+
+    let selectedLocation = null; // 'carling' or 'richmond'
+
+    // Show location -> health-card popup sequence and animate patient buttons
     window.addEventListener('DOMContentLoaded', function() {
+      var locationPopup = document.getElementById('locationPopupOverlay');
       var healthCardPopup = document.getElementById('healthCardPopupOverlay');
       var mainContent = document.getElementById('mainContent');
-      if (healthCardPopup) healthCardPopup.classList.add('show');
+      var carlingBtn = document.getElementById('carlingBtn');
+      var richmondBtn = document.getElementById('richmondBtn');
       var provincialBtn = document.getElementById('provincialBtn');
       var nonProvincialBtn = document.getElementById('nonProvincialBtn');
+      var existingPatientBtn = document.getElementById('existingPatientBtn');
+      var newPatientBtn = document.getElementById('newPatientBtn');
+      var waitlistLink = document.querySelector('.waitlist-link');
+
+      // Show the location selection first
+      if (locationPopup) locationPopup.classList.add('show');
+
+      if (carlingBtn) {
+        carlingBtn.onclick = function() {
+          selectedLocation = 'carling';
+          if (locationPopup) locationPopup.classList.remove('show');
+          if (healthCardPopup) healthCardPopup.classList.add('show');
+        };
+      }
+
+      if (richmondBtn) {
+        richmondBtn.onclick = function() {
+          selectedLocation = 'richmond';
+          if (locationPopup) locationPopup.classList.remove('show');
+          if (healthCardPopup) healthCardPopup.classList.add('show');
+        };
+      }
+
       if (provincialBtn) {
         provincialBtn.onclick = function() {
-          healthCardPopup.classList.remove('show');
+          if (healthCardPopup) healthCardPopup.classList.remove('show');
           if (mainContent) mainContent.style.display = '';
-          // Hide the waitlist link in the header
-          var waitlistLink = document.querySelector('.waitlist-link');
           if (waitlistLink) waitlistLink.style.display = 'none';
         };
       }
+
       if (nonProvincialBtn) {
         nonProvincialBtn.onclick = function() {
-          window.location.href = 'https://ocean.cognisantmd.com/online-booking/341f072e-411a-4b7a-9966-1d16966af184';
+          if (selectedLocation === 'carling') {
+            window.location.href = CARLING_BOOKING;
+          } else {
+            window.location.href = RICHMOND_NONPROV_REDIRECT;
+          }
         };
       }
-      // Patient buttons
-      var existingPatientBtn = document.getElementById('existingPatientBtn');
-      var newPatientBtn = document.getElementById('newPatientBtn');
+
+      // Patient buttons: animate and open links depending on selectedLocation
       let scale = 1;
       let growing = true;
       function animateButtons() {
@@ -261,14 +321,24 @@
         requestAnimationFrame(animateButtons);
       }
       animateButtons();
+
       if (existingPatientBtn) {
         existingPatientBtn.onclick = function() {
-          window.open('https://ocean.cognisantmd.com/online-booking/fc6b34ea-8362-46ec-a106-660f8c1c5a79', '_blank');
+          if (selectedLocation === 'carling') {
+            window.open(CARLING_BOOKING, '_blank');
+          } else {
+            window.open(RICHMOND_EXISTING, '_blank');
+          }
         };
       }
+
       if (newPatientBtn) {
         newPatientBtn.onclick = function() {
-          window.open('https://ocean.cognisantmd.com/online-booking/341f072e-411a-4b7a-9966-1d16966af184', '_blank');
+          if (selectedLocation === 'carling') {
+            window.open(CARLING_BOOKING, '_blank');
+          } else {
+            window.open(RICHMOND_NEW, '_blank');
+          }
         };
       }
     });
