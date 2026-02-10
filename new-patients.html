@@ -280,6 +280,14 @@
       text-align: center;
     }
 
+    /* Ensure location headings in the popup match theme color */
+    .popup h4 {
+      color: var(--primary);
+      margin-bottom: 0.5rem;
+      font-size: 1.15rem;
+      font-weight: 600;
+    }
+
     .popup h2 {
       margin-top: 0;
       color: var(--primary);
@@ -305,6 +313,19 @@
       transform: translateY(-3px);
       box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
     }
+
+    /* Location listings (Carling / Richmond) */
+    .locations-container {
+      max-width: 900px;
+      margin: 2rem auto 0 auto;
+      background: #fff;
+      padding: 1.25rem 1.5rem;
+      border-radius: 10px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+    }
+    .location-block h3 { margin: 0 0 0.5rem 0; color: var(--primary); }
+    .location-block p { margin: 0.25rem 0; }
+    .locations-container hr { border:0; border-top:2px solid #eef2f6; margin:1rem 0; }
 
   </style>
 </head>
@@ -381,6 +402,33 @@
         New Patient Registration
       </button>
     </div>
+    
+    <div class="locations-container">
+      <div class="location-block carling">
+        <h3>Carling Location</h3>
+        <p><strong>Rostering:</strong></p>
+        <p>Dr Shegun Momodu</p>
+        <p>Dr Ini Ife</p>
+        <p style="margin-top:0.6rem;"><strong>Walk-in Physicians:</strong></p>
+        <p>Dr Chesda Bun</p>
+        <p>Dr Siyong Lee</p>
+        <p style="margin-top:0.6rem;"><strong>Specialists:</strong></p>
+        <p>Dr Keiko Chan (Focused Practice in Gynaecology)</p>
+      </div>
+
+      <hr>
+
+      <div class="location-block richmond">
+        <h3>Richmond Location</h3>
+        <p><strong>Rostering:</strong></p>
+        <p>Dr Sydney Chinagorom</p>
+        <p>Dr Nsikak Usoroh</p>
+        <p>Dr Alex Carrington</p>
+        <p style="margin-top:0.6rem;"><strong>Walk-in Physicians:</strong></p>
+        <p>Dr Chesda Bun</p>
+        <p>Dr Siyong Lee</p>
+      </div>
+    </div>
   </main>
 
   <!-- Popup for Health Card Type -->
@@ -390,18 +438,38 @@
       <h2>Select Location</h2>
       <p>Please choose the location you are attending:</p>
       <div style="text-align:left; margin: 1rem 0;">
-        <strong>Carling:</strong>
-        <ul style="margin-top:0.5rem; margin-bottom:0.75rem;">
+        <h4 style="margin:0 0 0.5rem 0;">Carling</h4>
+        <p style="margin:0 0 0.25rem 0;"><strong>Rostering:</strong></p>
+        <ul style="margin-top:0.25rem; margin-bottom:0.5rem;">
           <li>Dr Shegun Momodu</li>
-          <li>Dr Siyoung Lee (walk-in)</li>
+          <li>Dr Ini Ife</li>
         </ul>
 
-        <strong>Richmond:</strong>
-        <ul style="margin-top:0.5rem; margin-bottom:0.75rem;">
-          <li>Dr Alex Carrington</li>
+        <p style="margin-top:0.35rem; margin-bottom:0.25rem;"><strong>Walk-in Physicians:</strong></p>
+        <ul style="margin-top:0.25rem; margin-bottom:0.5rem;">
+          <li>Dr Chesda Bun</li>
+          <li>Dr Siyong Lee</li>
+        </ul>
+
+        <p style="margin-top:0.35rem; margin-bottom:0.25rem;"><strong>Specialists:</strong></p>
+        <ul style="margin-top:0.25rem; margin-bottom:0.75rem;">
+          <li>Dr Keiko Chan (Focused Practice in Gynaecology)</li>
+        </ul>
+
+        <hr style="border:0; border-top:1px solid #e9edf1; margin:0.75rem 0;">
+
+        <h4 style="margin:0 0 0.5rem 0;">Richmond</h4>
+        <p style="margin:0 0 0.25rem 0;"><strong>Rostering:</strong></p>
+        <ul style="margin-top:0.25rem; margin-bottom:0.5rem;">
           <li>Dr Sydney Chinagorom</li>
           <li>Dr Nsikak Usoroh</li>
-          <li>Dr Chesda Bun (walk-in)</li>
+          <li>Dr Alex Carrington</li>
+        </ul>
+
+        <p style="margin-top:0.35rem; margin-bottom:0.25rem;"><strong>Walk-in Physicians:</strong></p>
+        <ul style="margin-top:0.25rem; margin-bottom:0;">
+          <li>Dr Chesda Bun</li>
+          <li>Dr Siyong Lee</li>
         </ul>
       </div>
       <button class="end-button" id="carlingBtn">Carling</button>
