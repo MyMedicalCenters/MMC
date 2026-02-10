@@ -227,6 +227,23 @@
       white-space: nowrap;
     }
 
+    /* Prominent OceanMD link styling */
+    .oceanmd-link {
+      font-size: 1.25rem;
+      text-decoration: none;
+      color: #ffffff;
+      background-color: var(--primary);
+      padding: 0.45rem 0.9rem;
+      border-radius: 8px;
+      display: inline-block;
+      box-shadow: 0 6px 18px rgba(0,0,0,0.12);
+      font-weight: 700;
+    }
+    .oceanmd-link:hover {
+      background-color: #005f9e;
+      transform: translateY(-2px);
+    }
+
     @media (max-width: 768px) {
       .nav { display: none; }
       .hamburger-menu { display: flex; }
@@ -274,13 +291,24 @@
     <h1>Women's Health Clinic<br><span style="font-size:1.3rem;font-weight:400;">with Dr. Keiko Chan & RM Summer O’Neill</span></h1>
   <!-- Replace the image file at ./images/keiko_summer.jpg with your photo of Keiko and Summer -->
   <img src="https://i.postimg.cc/3wbWj0DQ/image0.jpg" alt="Dr. Keiko Chan and RM Summer O'Neill" class="photo-placeholder">
-    <!-- Referral form download-only (moved here so it appears under the image) -->
     <div class="referral-section" id="referralSection">
-      <h2>Referral & New Patient Form</h2>
-      <p>Please download, print, and complete the form. Click the button below to download the PDF.</p>
+      <h2>We only accept referrals through OceanMD</h2>
       <p style="text-align:center; margin-top:0.8rem;">
-        <a href="https://raw.githubusercontent.com/MyMedicalCenters/MMC/482f79b960f4507195ec0c32bd069d892c4836a4/WHealth-Form.pdf" download class="book-appointment-btn" style="border-radius:8px; padding:0.55rem 0.9rem; margin:0 auto; display:inline-block;">Download / Print Referral Form</a>
+        <a href="https://ocean.cognisantmd.com/referrals/NewReferral.html" target="_blank" rel="noopener" class="oceanmd-link">
+          <strong><em>OceanMD is FREE for the sender</em></strong>
+        </a>
       </p>
+      <div style="margin-top:1rem;">
+        <h3 style="margin-bottom:0.4rem;">How to send a referral (quick steps)</h3>
+        <ol style="margin-top:0; padding-left:1.25rem;">
+          <li>Sign in (or <a href="https://www.oceanmd.com/getting-started/" target="_blank" rel="noopener">sign up</a>) to Clinic Account on the top right.</li>
+          <li>Click the OceanMD link above to open the referral page.</li>
+          <li>Make sure your selected location is set near <strong>Ottawa</strong>.</li>
+          <li>In the "Find any health service" search bar, type: <strong>My Medical Centers - Women's Health Keiko Chan</strong>.</li>
+          <li>Open the provider entry and click the <strong>Send eReferral</strong> button on bottom of their page to complete the referral.</li>
+        </ol>
+          <p style="margin:0.5rem 0 0 0; font-weight:600;">If you have any trouble, visit <a href="https://www.oceanmd.com/getting-started/" target="_blank" rel="noopener"></a> <a href="https://www.oceanmd.com/contact-us/" target="_blank" rel="noopener">OceanMD Contact Us</a> page</a>.</p>
+      </div>
     </div>
     <h2>What Conditions We See</h2>
     <ul>
@@ -306,6 +334,7 @@
     <div class="contact-box">
       <strong>Contact for Referrals & Questions:</strong><br>
       Referrals Coordinator: <a href="mailto:admin@mymedicalcenters.ca">admin@mymedicalcenters.ca</a><br>
+      Address: 1081 Carling Ave Unit 507, Ottawa, ON K1Y 4G2<br>
       Fax: 613-907-4455
     </div>
   </main>
