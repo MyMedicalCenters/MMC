@@ -93,18 +93,27 @@
       color: var(--accent);
     }
 
+
     .video-container {
       position: relative;
       width: 100%;
-      height: calc(100vh - 60px);
+      height: 70vh; /* bigger video */
+      max-height: 840px;
       overflow: hidden;
-      top: 60px;
+      margin-top: 8px; /* place the video just below the CTA (slightly closer) */
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 1rem 0;
     }
 
     #mainVideo {
-      width: 100%;
+      width: 85%;
       height: 100%;
-      object-fit: contain;
+      max-width: 1200px;
+      object-fit: cover;
+      border-radius: 8px;
+      display: block;
     }
 
     .video-controls {
@@ -112,6 +121,16 @@
       top: 20px;
       right: 20px;
       z-index: 10;
+    }
+
+    .video-controls button {
+      background-color: rgba(255,255,255,0.85);
+      border: none;
+      border-radius: 6px;
+      padding: 0.45rem 0.6rem;
+      margin-left: 0.5rem;
+      cursor: pointer;
+      font-size: 18px;
     }
 
     #playPauseBtn {
@@ -278,6 +297,10 @@
       display: block;
       float: none;
     }
+
+    .hero-cta { height: 160px; margin-top: 80px; }
+    .big-appointment-btn { font-size: 1.1rem; padding: 0.9rem 1.6rem; }
+    .video-container { height: 50vh; }
   }
 
 
@@ -345,6 +368,36 @@
   margin-right: 1.5rem;
 }
 
+    /* Hero CTA placed where the video used to be */
+    .hero-cta {
+      position: relative;
+      width: 100%;
+      height: 220px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 1rem;
+      box-sizing: border-box;
+      margin-top: 58px; /* move the CTA up while keeping gap to video */
+    }
+
+    .big-appointment-btn {
+      background: linear-gradient(90deg, #5fa1bc, #2d9cbc);
+      color: #fff;
+      padding: 1.2rem 2.4rem;
+      border-radius: 40px;
+      font-size: 1.6rem;
+      font-weight: 700;
+      text-decoration: none;
+      box-shadow: 0 8px 30px rgba(47,128,142,0.25);
+      transition: transform 0.15s ease, box-shadow 0.15s ease;
+    }
+
+    .big-appointment-btn:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 40px rgba(47,128,142,0.35);
+    }
+
     .dropdown-menu button.book-appointment-btn {
       display: inline-flex !important;
       margin-top: 1.5rem;
@@ -407,6 +460,10 @@
   </header>
 
   <!-- Video Section -->
+  <!-- Hero CTA (big button where the video used to be) -->
+  <section class="hero-cta">
+    <a href="appointment.html" class="big-appointment-btn">Book Appointment Now!</a>
+  </section>
   <main class="video-container">
     <video id="mainVideo" muted>
       <source src="https://ia601501.us.archive.org/7/items/mmc-video-reworked/MMC_Video_Reworked.mp4" type="video/mp4">
@@ -414,6 +471,7 @@
     </video>
     <div class="video-controls">
       <button id="playPauseBtn">▶</button>
+      <button id="muteUnmuteBtn">🔇</button>
     </div>
     <div id="endButtons" style="display: none;">
       <button id="learnMoreBtn" class="end-button">Learn more about our services!</button>
@@ -487,6 +545,13 @@
       }
     });
 
+    // Mute/unmute button (starts muted)
+    const muteUnmuteBtn = document.getElementById('muteUnmuteBtn');
+    muteUnmuteBtn.addEventListener('click', () => {
+      video.muted = !video.muted;
+      muteUnmuteBtn.innerHTML = video.muted ? '🔇' : '🔊';
+    });
+
     // On video end, dim the video, hide the play/pause button, and show end buttons
     video.addEventListener('ended', () => {
       video.style.filter = 'brightness(0.5)';
@@ -494,17 +559,17 @@
       endButtons.style.display = 'flex';
     });
 
-    // Ensure the video fits the viewport without overlap or white space
-    window.addEventListener('resize', () => {
-      const headerHeight = document.querySelector('.header').offsetHeight;
-      document.querySelector('.video-container').style.height = `calc(100vh - ${headerHeight}px)`;
-    });
+    // Keep the video at the smaller size and lower position on load/resize
+    function setVideoLayout() {
+      const vc = document.querySelector('.video-container');
+      if (vc) {
+        vc.style.height = '70vh';
+        vc.style.marginTop = '8px';
+      }
+    }
 
-    // Initial adjustment to fit the video when the page loads
-    window.addEventListener('load', () => {
-      const headerHeight = document.querySelector('.header').offsetHeight;
-      document.querySelector('.video-container').style.height = `calc(100vh - ${headerHeight}px)`;
-    });
+    window.addEventListener('resize', setVideoLayout);
+    window.addEventListener('load', setVideoLayout);
 
     // Add event listeners to the buttons at the end of the video
     document.getElementById('learnMoreBtn').addEventListener('click', () => {
@@ -515,13 +580,11 @@
       window.location.href = 'new-patients.html';
     });
 
-    // Close announcement popup for patients
+    // Close announcement popup for patients (do NOT autoplay)
     closeAnnouncementBtn.addEventListener('click', () => {
       announcementPopup.classList.remove('show');
-      // For patients, play video, unmute, etc.
-      video.muted = false;
-      video.play();
-      playPauseBtn.innerHTML = '❚❚';
+      // Keep video paused and muted until user chooses
+      video.muted = true;
     });
 
      // Hamburger menu functionality
