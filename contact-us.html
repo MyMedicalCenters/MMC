@@ -178,6 +178,19 @@
       margin: 0.5em 0;
     }
 
+    .contact-info h3 {
+      color: var(--primary);
+      margin: 0.5rem 0 0.25rem 0;
+      font-size: 1.05rem;
+      font-weight: 600;
+    }
+
+    .contact-info hr {
+      border: 0;
+      border-top: 3px solid #e6e9ef;
+      margin: 1.25rem 0;
+    }
+
     /* Responsive adjustments */
     @media (max-width: 768px) {
       .nav {
@@ -244,11 +257,24 @@
     </div>
     <div class="contact-info">
       <h2>Get in Touch</h2>
-      <p><strong>Email (Carling Location):</strong> admin@mymedicalcenters.ca</p>
-      <p><strong>Email (Richmond Location):</strong> patient@mymedicalcenters.ca</p>
-      <p><strong>Phone:</strong> 613-704-2524</p>
-      <p><strong>Address (MMC 1 - Carling):</strong> 1081 Carling Avenue, Unit 507, Ottawa, ON K1Y 4G2</p>
-      <p><strong>Address (MMC 2 - Richmond):</strong> 190 Richmond Rd, Ottawa, ON K1Z 6W6 (inside Superstore, Second Level)</p>
+
+      <div class="location-block carling">
+        <h3>Carling Location</h3>
+        <p><strong>Email:</strong> admin@mymedicalcenters.ca</p>
+        <p><strong>Phone:</strong> 613-704-2524</p>
+        <p><strong>Address:</strong> 1081 Carling Avenue, Unit 507, Ottawa, ON K1Y 4G2</p>
+        <p><strong>Fax:</strong> 613-704-2430</p>
+      </div>
+
+      <hr>
+
+      <div class="location-block richmond">
+        <h3>Richmond Location</h3>
+        <p><strong>Email:</strong> patient@mymedicalcenters.ca</p>
+        <p><strong>Phone:</strong> 613-704-2524</p>
+        <p><strong>Address:</strong> 190 Richmond Rd, Ottawa, ON K1Z 6W6 (inside Superstore, Second Level)</p>
+        <p><strong>Fax:</strong> 613-704-2636</p>
+      </div>
     </div>
   </div>
 
