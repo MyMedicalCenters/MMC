@@ -22,15 +22,15 @@
       height: 100%;
     }
 
-    /* Logo at the top left */
+    /* Logo placed under the header (flows in document, above CTA) */
     .logo-container {
-      position: absolute;
-      top: 85px;
-      left: 27px;
+      position: relative;
+      margin: 24px 0 0 27px; /* moved down further so it sits clearly below the fixed header */
       z-index: 1100;
       width: 100px;
       transition: transform 0.3s ease-in-out;
       cursor: pointer;
+      display: block;
     }
 
     .logo-container img {
@@ -275,15 +275,13 @@
       display: flex; /* Show hamburger menu */
     }
 
-    /* Logo at the top left */
+    /* Keep logo positioned under header on mobile as well; reduce size so it doesn't cover CTA */
     .logo-container {
-      position: absolute;
-      top: 85px;
-      left: 27px;
+      position: relative;
+      margin: 55px 0 0 12px; /* moved down on mobile to avoid touching CTA */
       z-index: 1100;
-      width: 80px;
-      transition: transform 0.3s ease-in-out;
-      cursor: pointer;
+      width: 56px;
+      transition: transform 0.15s ease;
     }
 
     .book-appointment-btn {
@@ -368,6 +366,10 @@
   margin-right: 1.5rem;
 }
 
+.header-inline-logo {
+  display: none;
+}
+
     /* Hero CTA placed where the video used to be */
     .hero-cta {
       position: relative;
@@ -391,6 +393,12 @@
       text-decoration: none;
       box-shadow: 0 8px 30px rgba(47,128,142,0.25);
       transition: transform 0.15s ease, box-shadow 0.15s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      white-space: normal;
+      line-height: 1.1;
     }
 
     .big-appointment-btn:hover {
@@ -424,10 +432,7 @@
   </style>
 </head>
 <body>
-  <!-- Logo Section -->
-  <div class="logo-container">
-    <img src="https://i.postimg.cc/wTrcjZ7f/MMC-transformed.png" alt="Medical Center Logo" id="mainLogo">
-  </div>
+  <!-- (removed top-level floating logo; logo will be inside header to sit under it) -->
 
   <header class="header">
     <div class="logo">My Medical Centers</div>
@@ -458,6 +463,11 @@
       <button onclick="window.location.href='new-patients.html'" class="book-appointment-btn" style="display:inline-flex; margin-top:1.5rem; width:auto; font-size:1.2rem;">Book Appointment Now!</button>
     </div>
   </header>
+
+  <!-- Logo placed under header so it does not sit inside header element -->
+  <div class="logo-container">
+    <img src="https://i.postimg.cc/wTrcjZ7f/MMC-transformed.png" alt="Medical Center Logo" id="mainLogo">
+  </div>
 
   <!-- Video Section -->
   <!-- Hero CTA (big button where the video used to be) -->
