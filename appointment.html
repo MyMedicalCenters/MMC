@@ -112,6 +112,11 @@
       border-radius: 10px;
       box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
       text-align: center;
+      width: 520px;
+      max-width: 92%;
+      max-height: 80vh;
+      overflow-y: auto;
+      box-sizing: border-box;
     }
 
     /* Ensure location headings in the popup match theme color */
@@ -138,6 +143,19 @@
       cursor: pointer;
       transition: transform 0.3s ease, box-shadow 0.3s ease;
       margin: 0.5rem;
+    }
+    /* Actions container for location buttons */
+    .popup .location-actions {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      margin-top: 1rem;
+      align-items: center;
+      flex-wrap: nowrap;
+    }
+    .popup .location-actions .end-button {
+      min-width: 140px;
+      flex: 1 1 auto;
     }
     .popup .end-button:hover {
       transform: translateY(-3px);
@@ -188,6 +206,28 @@
         font-size: 2rem;
       }
     }
+    @media (max-width: 480px) {
+      .popup {
+        width: 96%;
+        padding: 1rem;
+        max-height: 86vh;
+      }
+      .popup h2 {
+        font-size: 1.25rem;
+      }
+      .popup p {
+        font-size: 0.95rem;
+      }
+      .popup .location-actions {
+        gap: 0.5rem;
+      }
+      .popup .location-actions .end-button {
+        flex: 0 0 48%;
+        padding: 0.75rem 0.5rem;
+        font-size: 1rem;
+        border-radius: 8px;
+      }
+    }
   </style>
 </head>
 <body>
@@ -201,7 +241,6 @@
       <a href="contact-us.html">Contact Us!</a>
       <a href="privacy-policy.html">Privacy Policy</a>
       <a href="new-patients.html">Patient Registration & Update</a>
-      <a href="waitlist.html" class="waitlist-link">Join Our Waitlist!</a>
     </nav>
   </header>
 
@@ -223,10 +262,9 @@
           <li>Dr Ini Ife</li>
         </ul>
 
-        <p style="margin-top:0.35rem; margin-bottom:0.25rem;"><strong>Walk-in Physicians:</strong></p>
+        <p style="margin-top:0.35rem; margin-bottom:0.25rem;"><strong>Non-Rostering Physicians:</strong></p>
         <ul style="margin-top:0.25rem; margin-bottom:0.5rem;">
-          <li>Dr Chesda Bun</li>
-          <li>Dr Siyong Lee</li>
+          <li>Dr I.Ata</li>
         </ul>
 
         <p style="margin-top:0.35rem; margin-bottom:0.25rem;"><strong>Specialists:</strong></p>
@@ -248,10 +286,13 @@
         <ul style="margin-top:0.25rem; margin-bottom:0;">
           <li>Dr Chesda Bun</li>
           <li>Dr Siyong Lee</li>
+          <li>Dr Saha Nirob</li>
         </ul>
       </div>
-      <button class="end-button" id="carlingBtn">Carling</button>
-      <button class="end-button" id="richmondBtn">Richmond</button>
+      <div class="location-actions">
+        <button class="end-button" id="carlingBtn">Carling</button>
+        <button class="end-button" id="richmondBtn">Richmond</button>
+      </div>
     </div>
   </div>
 
