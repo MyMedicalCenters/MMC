@@ -278,6 +278,11 @@
       border-radius: 10px;
       box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
       text-align: center;
+      width: 520px;
+      max-width: 92%;
+      max-height: 80vh;
+      overflow-y: auto;
+      box-sizing: border-box;
     }
 
     /* Ensure location headings in the popup match theme color */
@@ -314,6 +319,43 @@
       box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
     }
 
+    /* Actions container for location buttons */
+    .popup .location-actions {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      margin-top: 1rem;
+      align-items: center;
+      flex-wrap: nowrap;
+    }
+    .popup .location-actions .end-button {
+      min-width: 140px;
+      flex: 1 1 auto;
+    }
+
+    @media (max-width: 480px) {
+      .popup {
+        width: 96%;
+        padding: 1rem;
+        max-height: 86vh;
+      }
+      .popup h2 {
+        font-size: 1.25rem;
+      }
+      .popup p {
+        font-size: 0.95rem;
+      }
+      .popup .location-actions {
+        gap: 0.5rem;
+      }
+      .popup .location-actions .end-button {
+        flex: 0 0 48%;
+        padding: 0.75rem 0.5rem;
+        font-size: 1rem;
+        border-radius: 8px;
+      }
+    }
+
     /* Location listings (Carling / Richmond) */
     .locations-container {
       max-width: 900px;
@@ -340,7 +382,6 @@
       <a href="contact-us.html">Contact Us!</a>
       <a href="privacy-policy.html">Privacy Policy</a>
       <a href="new-patients.html">Patient Registration & Update</a>
-      <a href="waitlist.html" class="waitlist-link">Join Our Waitlist!</a>
     </nav>
 
     <!-- Hamburger menu icon for mobile -->
@@ -358,7 +399,6 @@
       <a href="contact-us.html">Contact Us!</a>
       <a href="privacy-policy.html">Privacy Policy</a>
       <a href="new-patients.html">Patient Registration & Update</a>
-      <a href="waitlist.html" class="waitlist-link">Join Our Waitlist!</a>
     </div>
   </header>
 
@@ -409,9 +449,8 @@
         <p><strong>Rostering:</strong></p>
         <p>Dr Shegun Momodu</p>
         <p>Dr Ini Ife</p>
-        <p style="margin-top:0.6rem;"><strong>Walk-in Physicians:</strong></p>
-        <p>Dr Chesda Bun</p>
-        <p>Dr Siyong Lee</p>
+        <p style="margin-top:0.6rem;"><strong>Non-Rostering Physicians:</strong></p>
+        <p>Dr I.Ata</p>
         <p style="margin-top:0.6rem;"><strong>Specialists:</strong></p>
         <p>Dr Keiko Chan (Focused Practice in Gynaecology)</p>
       </div>
@@ -427,6 +466,7 @@
         <p style="margin-top:0.6rem;"><strong>Walk-in Physicians:</strong></p>
         <p>Dr Chesda Bun</p>
         <p>Dr Siyong Lee</p>
+        <p>Dr Saha Nirob</p>
       </div>
     </div>
   </main>
@@ -472,8 +512,10 @@
           <li>Dr Siyong Lee</li>
         </ul>
       </div>
-      <button class="end-button" id="carlingBtn">Carling</button>
-      <button class="end-button" id="richmondBtn">Richmond</button>
+      <div class="location-actions">
+        <button class="end-button" id="carlingBtn">Carling</button>
+        <button class="end-button" id="richmondBtn">Richmond</button>
+      </div>
     </div>
   </div>
 
