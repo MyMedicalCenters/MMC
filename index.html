@@ -25,8 +25,8 @@
     /* Logo placed under the header (flows in document, above CTA) */
     .logo-container {
       position: relative;
-      margin: 24px 0 0 27px; /* moved down further so it sits clearly below the fixed header */
-      z-index: 1100;
+      margin: 70px 0 0 27px; /* ensure it sits below the fixed header */
+      z-index: 900; /* place under the header (header z-index:1000) */
       width: 100px;
       transition: transform 0.3s ease-in-out;
       cursor: pointer;
@@ -279,7 +279,7 @@
     .logo-container {
       position: relative;
       margin: 55px 0 0 12px; /* moved down on mobile to avoid touching CTA */
-      z-index: 1100;
+      z-index: 900; /* keep below header on mobile too */
       width: 56px;
       transition: transform 0.15s ease;
     }
