@@ -512,10 +512,14 @@
           <li>Dr Chesda Bun</li>
           <li>Dr Siyong Lee</li>
         </ul>
+
+        <hr style="border:0; border-top:1px solid #e9edf1; margin:0.75rem 0;">
+        <h4 style="margin:0 0 0.5rem 0;">Orléans (Coming Soon)</h4>
       </div>
       <div class="location-actions">
         <button class="end-button" id="carlingBtn">Carling</button>
         <button class="end-button" id="richmondBtn">Richmond</button>
+        <button class="end-button" id="orleansBtn" style="opacity:0.95; cursor:pointer;">Orléans (Coming Soon)</button>
       </div>
     </div>
   </div>
@@ -590,6 +594,7 @@
         var healthCardPopup = document.getElementById('healthCardPopupOverlay');
         var carlingBtn = document.getElementById('carlingBtn');
         var richmondBtn = document.getElementById('richmondBtn');
+        var orleansBtn = document.getElementById('orleansBtn');
         var provincialBtn = document.getElementById('provincialBtn');
         var nonProvincialBtn = document.getElementById('nonProvincialBtn');
         var waitlistLink = document.querySelector('.waitlist-link');
@@ -610,6 +615,12 @@
             selectedLocation = 'richmond';
             if (locationPopup) locationPopup.classList.remove('show');
             if (healthCardPopup) healthCardPopup.classList.add('show');
+          };
+        }
+
+        if (orleansBtn) {
+          orleansBtn.onclick = function() {
+            window.location.href = 'https://tally.so/r/QK8bdG';
           };
         }
 
