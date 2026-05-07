@@ -401,6 +401,10 @@
       line-height: 1.1;
     }
 
+      /* Make top CTA match hero CTA size */
+      .top-cta { display:flex; justify-content:center; margin-top:12px; }
+      .top-cta .big-appointment-btn, .hero-cta .big-appointment-btn { width: 85%; max-width: 1200px; }
+
     .big-appointment-btn:hover {
       transform: translateY(-4px);
       box-shadow: 0 12px 40px rgba(47,128,142,0.35);
@@ -469,10 +473,15 @@
     <img src="https://i.postimg.cc/wTrcjZ7f/MMC-transformed.png" alt="Medical Center Logo" id="mainLogo">
   </div>
 
+  <!-- Orleans waitlist button placed under header and above main CTA -->
+  <div class="top-cta">
+    <a href="https://tally.so/r/QK8bdG" class="big-appointment-btn">Join Waitlist Now! (ONLY Orléans Jeanne-d'Arc location)</a>
+  </div>
+
   <!-- Video Section -->
   <!-- Hero CTA (big button where the video used to be) -->
   <section class="hero-cta">
-    <a href="appointment.html" class="big-appointment-btn">Book Appointment Now!</a>
+    <a href="appointment.html" class="big-appointment-btn">Book Appointment (ONLY Carling and Richmond locations)</a>
   </section>
   <main class="video-container">
     <video id="mainVideo" muted>
