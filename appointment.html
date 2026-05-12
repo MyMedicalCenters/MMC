@@ -285,13 +285,18 @@
         <p style="margin-top:0.35rem; margin-bottom:0.25rem;"><strong>Walk-in Physicians:</strong></p>
         <ul style="margin-top:0.25rem; margin-bottom:0;">
           <li>Dr Chesda Bun</li>
-          <li>Dr Siyong Lee</li>
-          <li>Dr Saha Nirob</li>
+        </ul>
+        <hr style="border:0; border-top:1px solid #e9edf1; margin:0.75rem 0;">
+        <h4 style="margin:0 0 0.5rem 0;">Orléans</h4>
+        <p style="margin:0 0 0.25rem 0;"><strong>Rostering:</strong></p>
+        <ul style="margin-top:0.25rem; margin-bottom:0.5rem;">
+          <li>Dr Iqbal Kashif</li>
         </ul>
       </div>
       <div class="location-actions">
         <button class="end-button" id="carlingBtn">Carling</button>
         <button class="end-button" id="richmondBtn">Richmond</button>
+        <button class="end-button" id="orleansBtn">Orléans</button>
       </div>
     </div>
   </div>
@@ -339,6 +344,13 @@
         <p>Dr Chesda Bun</p>
         <p>Dr Siyong Lee</p>
       </div>
+      <hr style="border:0; border-top:2px solid #eef2f6; margin:1rem 0;">
+
+      <div class="location-block orleans">
+        <h3 style="color:var(--primary); margin:0 0 0.5rem 0;">Orléans Location</h3>
+        <p><strong>Rostering:</strong></p>
+        <p>Dr Iqbal Kashif</p>
+      </div>
     </div>
   </main>
 
@@ -347,6 +359,7 @@
     const RICHMOND_EXISTING = 'https://ocean.cognisantmd.com/online-booking/fc6b34ea-8362-46ec-a106-660f8c1c5a79';
     const RICHMOND_NEW = 'https://ocean.cognisantmd.com/online-booking/341f072e-411a-4b7a-9966-1d16966af184';
     const CARLING_BOOKING = 'https://ocean.cognisantmd.com/online-booking/a7eb5850-834a-4bab-8e1d-11701aa8790e';
+    const ORLEANS_BOOKING = 'https://ocean.cognisantmd.com/online-booking/67d10914-60fd-47e1-a422-99f8ec407985';
     const RICHMOND_NONPROV_REDIRECT = 'https://ocean.cognisantmd.com/intake/patients.html?linkRef=341f072e-411a-4b7a-9966-1d16966af184#/online-booking';
 
     let selectedLocation = null; // 'carling' or 'richmond'
@@ -358,6 +371,7 @@
       var mainContent = document.getElementById('mainContent');
       var carlingBtn = document.getElementById('carlingBtn');
       var richmondBtn = document.getElementById('richmondBtn');
+      var orleansBtn = document.getElementById('orleansBtn');
       var provincialBtn = document.getElementById('provincialBtn');
       var nonProvincialBtn = document.getElementById('nonProvincialBtn');
       var existingPatientBtn = document.getElementById('existingPatientBtn');
@@ -380,6 +394,13 @@
           selectedLocation = 'richmond';
           if (locationPopup) locationPopup.classList.remove('show');
           if (healthCardPopup) healthCardPopup.classList.add('show');
+        };
+      }
+
+      if (orleansBtn) {
+        orleansBtn.onclick = function() {
+          selectedLocation = 'orleans';
+          window.location.href = ORLEANS_BOOKING;
         };
       }
 
