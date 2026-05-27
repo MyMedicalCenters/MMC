@@ -444,7 +444,7 @@
       <a href="index.html">Home</a>
       <a href="services.html">Our Services</a>
   <a href="WHealth.html" id="navProfessionalButton">Women's Health Clinic</a>
-      <a href="new-patients.html">Patient Registration & Update</a>
+  <a href="#" id="navPapImmunLink">Pap Test & Immunization</a>
       <a href="contact-us.html">Contact Us!</a>
       <a href="privacy-policy.html">Privacy Policy</a>
     </nav>
@@ -461,10 +461,10 @@
       <a href="index.html">Home</a>
       <a href="services.html">Our Services</a>
   <a href="WHealth.html">Women's Health Clinic</a>
-      <a href="new-patients.html">Patient Registration & Update</a>
+  <a href="#" id="navPapImmunLinkMobile">Pap Test & Immunization</a>
       <a href="contact-us.html">Contact Us!</a>
       <a href="privacy-policy.html">Privacy Policy</a>
-      <button onclick="window.location.href='new-patients.html'" class="book-appointment-btn" style="display:inline-flex; margin-top:1.5rem; width:auto; font-size:1.2rem;">Book Appointment Now!</button>
+  <button onclick="window.location.href='appointment.html'" class="book-appointment-btn" style="display:inline-flex; margin-top:1.5rem; width:auto; font-size:1.2rem;">Book Appointment Now!</button>
     </div>
   </header>
 
@@ -500,6 +500,18 @@
       <p>Please select a service:</p>
       <button class="button professionals" id="popupProfessionalButton">Women's Health Clinic</button>
       <button class="button clients" id="clientButton">Family Doctor/Walk-in</button>
+      <button class="button professionals" id="popupPapImmunButton">Pap Test/Immunization Request</button>
+    </div>
+  </div>
+
+  <!-- Secondary Popup: Pap Test or Immunization Request -->
+  <div class="popup-overlay" id="secondaryPopup">
+    <div class="popup">
+      <h2>Select Request</h2>
+      <p>Please choose:</p>
+      <button class="button professionals" id="papTestBtn">Pap Test</button>
+      <button class="button clients" id="immunBtn">Immunization Request</button>
+      <button class="button" id="backToMainBtn" style="background:#e0e0e0;color:#111;margin-top:0.5rem;">Back</button>
     </div>
   </div>
 
@@ -542,11 +554,123 @@
       }, 2000);
     });
 
-  // Redirect to "WHealth.html" when the navigation link is clicked
+    // Redirect to "WHealth.html" when the navigation link is clicked
     document.getElementById('navProfessionalButton').addEventListener('click', (event) => {
       event.preventDefault();
   window.location.href = 'WHealth.html';
     });
+
+    // Show popup when "Pap Test & Immunization" nav links are clicked (works on any page)
+    const navPapImmunLink = document.getElementById('navPapImmunLink');
+    const navPapImmunLinkMobile = document.getElementById('navPapImmunLinkMobile');
+
+    function createPapImmunPopupsIfNeeded() {
+      // Ensure main overlay exists
+      let overlay = document.getElementById('popupOverlay');
+      if (!overlay) {
+        overlay = document.createElement('div');
+        overlay.className = 'popup-overlay';
+        overlay.id = 'popupOverlay';
+        overlay.innerHTML = `
+        <div class="popup">
+          <h2>Welcome to My Medical Centers</h2>
+          <p>Please select a service:</p>
+          <button class="button professionals" id="popupProfessionalButton">Women's Health Clinic</button>
+          <button class="button clients" id="clientButton">Family Doctor/Walk-in</button>
+          <button class="button professionals" id="popupPapImmunButton">Pap Test/Immunization Request</button>
+        </div>`;
+        document.body.appendChild(overlay);
+      }
+
+      // Ensure secondary overlay exists
+      let secondary = document.getElementById('secondaryPopup');
+      if (!secondary) {
+        secondary = document.createElement('div');
+        secondary.className = 'popup-overlay';
+        secondary.id = 'secondaryPopup';
+        secondary.innerHTML = `
+        <div class="popup">
+          <h2>Select Request</h2>
+          <p>Please choose:</p>
+          <button class="button professionals" id="papTestBtn">Pap Test</button>
+          <button class="button clients" id="immunBtn">Immunization Request</button>
+          <button class="button" id="backToMainBtn" style="background:#e0e0e0;color:#111;margin-top:0.5rem;">Back</button>
+        </div>`;
+        document.body.appendChild(secondary);
+      }
+
+      // Wire up buttons (idempotent)
+      const popupPapBtn = document.getElementById('popupPapImmunButton');
+      const popupClientBtn = document.getElementById('clientButton');
+      const popupProfBtn = document.getElementById('popupProfessionalButton');
+
+      // Show secondary when Pap/Immun button clicked
+      if (popupPapBtn && !popupPapBtn._wired) {
+        popupPapBtn.addEventListener('click', () => {
+          overlay.classList.remove('show');
+          secondary.classList.add('show');
+        });
+        popupPapBtn._wired = true;
+      }
+
+      const papBtn = document.getElementById('papTestBtn');
+      const immunBtn = document.getElementById('immunBtn');
+      const backBtn = document.getElementById('backToMainBtn');
+
+      if (papBtn && !papBtn._wired) { papBtn.addEventListener('click', () => window.location.href = 'pap.html'); papBtn._wired = true; }
+      if (immunBtn && !immunBtn._wired) { immunBtn.addEventListener('click', () => window.location.href = 'tally.html'); immunBtn._wired = true; }
+      if (backBtn && !backBtn._wired) {
+        backBtn.addEventListener('click', () => {
+          secondary.classList.remove('show');
+          overlay.classList.add('show');
+        });
+        backBtn._wired = true;
+      }
+
+      if (popupClientBtn && !popupClientBtn._wired) {
+        popupClientBtn.addEventListener('click', () => {
+          overlay.classList.remove('show');
+          const announcement = document.getElementById('announcementPopup');
+          if (announcement) announcement.classList.add('show');
+        });
+        popupClientBtn._wired = true;
+      }
+      if (popupProfBtn && !popupProfBtn._wired) {
+        popupProfBtn.addEventListener('click', (e) => {
+          e.preventDefault();
+          overlay.classList.remove('show');
+          const announcement = document.getElementById('announcementPopup');
+          if (announcement) announcement.classList.add('show');
+          setTimeout(() => { window.location.href = 'WHealth.html'; }, 2000);
+        });
+        popupProfBtn._wired = true;
+      }
+
+      return overlay;
+    }
+
+    function showPapImmunPopup() {
+      // Ensure popups exist and are wired
+      const overlay = createPapImmunPopupsIfNeeded();
+      const secondary = document.getElementById('secondaryPopup');
+      // Show secondary (Select Request) directly
+      if (overlay) overlay.classList.remove('show');
+      if (secondary) secondary.classList.add('show');
+    }
+
+    if (navPapImmunLink) {
+      navPapImmunLink.addEventListener('click', (e) => {
+        e.preventDefault();
+        showPapImmunPopup();
+      });
+    }
+    if (navPapImmunLinkMobile) {
+      navPapImmunLinkMobile.addEventListener('click', (e) => {
+        e.preventDefault();
+        showPapImmunPopup();
+        dropdownMenu.classList.remove('show');
+      });
+    }
 
     // Toggle play/pause with the button
     playPauseBtn.addEventListener('click', () => {
@@ -591,7 +715,7 @@
     });
 
     document.getElementById('joinWaitlistBtn').addEventListener('click', () => {
-      window.location.href = 'new-patients.html';
+      window.location.href = 'appointment.html';
     });
 
     // Close announcement popup for patients (do NOT autoplay)
@@ -609,6 +733,41 @@
       dropdownMenu.classList.toggle('show'); // Toggle dropdown visibility
 
     });
+    
+    // Pap Test / Immunization secondary popup handlers
+    const popupPapImmunButton = document.getElementById('popupPapImmunButton');
+    const secondaryPopup = document.getElementById('secondaryPopup');
+    const papTestBtn = document.getElementById('papTestBtn');
+    const immunBtn = document.getElementById('immunBtn');
+    const backToMainBtn = document.getElementById('backToMainBtn');
+
+    if (popupPapImmunButton) {
+      popupPapImmunButton.addEventListener('click', () => {
+        popupOverlay.classList.remove('show');
+        if (secondaryPopup) secondaryPopup.classList.add('show');
+      });
+    }
+
+    if (papTestBtn) {
+      papTestBtn.addEventListener('click', () => {
+        // Redirect to pap.html (create this file separately)
+        window.location.href = 'pap.html';
+      });
+    }
+
+    if (immunBtn) {
+      immunBtn.addEventListener('click', () => {
+        // Redirect to tally.html (the immunization tally form you'll create)
+        window.location.href = 'tally.html';
+      });
+    }
+
+    if (backToMainBtn) {
+      backToMainBtn.addEventListener('click', () => {
+        if (secondaryPopup) secondaryPopup.classList.remove('show');
+        popupOverlay.classList.add('show');
+      });
+    }
   </script>
 </body>
 </html>
