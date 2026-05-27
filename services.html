@@ -244,6 +244,65 @@
         }
     }
 
+    /* Popup Styles (copied from index.html) */
+    .popup-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.5);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 2000;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.3s ease, visibility 0.3s ease;
+    }
+
+    .popup-overlay.show {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .popup {
+      background-color: white;
+      padding: 2rem;
+      border-radius: 10px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      max-width: 400px;
+      width: 90%;
+      text-align: center;
+    }
+    /* Button styles copied from index.html to keep popup consistent */
+    .button {
+      padding: 0.8rem 2rem;
+      border-radius: 50px;
+      font-size: 1rem;
+      color: white;
+      border: none;
+      cursor: pointer;
+      margin: 1rem 0;
+      width: 100%;
+      transition: background-color 0.3s ease;
+    }
+
+    .button.professionals {
+      background-color: var(--primary, #0077be);
+    }
+
+    .button.professionals:hover {
+      background-color: #005c91;
+    }
+
+    .button.clients {
+      background-color: #28a745; /* fallback green */
+    }
+
+    .button.clients:hover {
+      background-color: #218838;
+    }
   </style>
 </head>
 <body>
@@ -258,9 +317,9 @@
       <a href="index.html">Home</a>
       <a href="services.html">Our Services</a>
   <a href="WHealth.html">Women's Health Clinic</a>
+  <a href="#" id="navPapImmunLink">Pap Test & Immunization</a>
       <a href="contact-us.html">Contact Us!</a>
       <a href="privacy-policy.html">Privacy Policy</a>
-      <a href="new-patients.html">Patient Registration & Update</a>
     </nav>
 
     <!-- Hamburger menu icon for mobile -->
@@ -275,9 +334,9 @@
       <a href="index.html">Home</a>
       <a href="services.html">Our Services</a>
   <a href="WHealth.html">Women's Health Clinic</a>
+  <a href="#" id="navPapImmunLinkMobile">Pap Test & Immunization</a>
       <a href="contact-us.html">Contact Us!</a>
       <a href="privacy-policy.html">Privacy Policy</a>
-      <a href="new-patients.html">Patient Registration & Update</a>
     </div>
   </header>
 
@@ -345,6 +404,33 @@
   </main>
 
   <script>
+    // Pap Test & Immunization popup injection for this page
+    (function() {
+      function createSecondaryPopup() {
+        if (document.getElementById('secondaryPopup')) return;
+        const secondary = document.createElement('div');
+        secondary.className = 'popup-overlay';
+        secondary.id = 'secondaryPopup';
+        secondary.innerHTML = `
+          <div class="popup">
+            <h2>Select Request</h2>
+            <p>Please choose:</p>
+            <button class="button professionals" id="papTestBtn">Pap Test</button>
+            <button class="button clients" id="immunBtn">Immunization Request</button>
+            <button class="button" id="backToMainBtn" style="background:#e0e0e0;color:#111;margin-top:0.5rem;">Back</button>
+          </div>`;
+        document.body.appendChild(secondary);
+        document.getElementById('papTestBtn').addEventListener('click', () => window.location.href='pap.html');
+        document.getElementById('immunBtn').addEventListener('click', () => window.location.href='tally.html');
+        document.getElementById('backToMainBtn').addEventListener('click', () => document.getElementById('secondaryPopup').classList.remove('show'));
+      }
+
+      const navLink = document.getElementById('navPapImmunLink');
+      const navLinkMobile = document.getElementById('navPapImmunLinkMobile');
+      if (navLink) navLink.addEventListener('click', (e) => { e.preventDefault(); createSecondaryPopup(); document.getElementById('secondaryPopup').classList.add('show'); });
+      if (navLinkMobile) navLinkMobile.addEventListener('click', (e) => { e.preventDefault(); createSecondaryPopup(); document.getElementById('secondaryPopup').classList.add('show'); document.getElementById('dropdownMenu').classList.remove('show'); });
+    })();
+
     // Hamburger menu functionality
     const hamburgerMenu = document.getElementById('hamburgerMenu');
     const dropdownMenu = document.getElementById('dropdownMenu');
