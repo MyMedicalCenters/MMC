@@ -393,6 +393,7 @@
     const RICHMOND_NEW = 'https://ocean.cognisantmd.com/online-booking/341f072e-411a-4b7a-9966-1d16966af184';
     const CARLING_BOOKING = 'https://ocean.cognisantmd.com/online-booking/a7eb5850-834a-4bab-8e1d-11701aa8790e';
     const ORLEANS_BOOKING = 'https://ocean.cognisantmd.com/online-booking/2d67e44f-69a8-4c88-a00e-6f8f70944ffe';
+    const ORLEANS_EXISTING = 'https://ocean.cognisantmd.com/online-booking/80f54306-a63f-405e-af2c-decf0faf7408';
     const RICHMOND_NONPROV_REDIRECT = 'https://ocean.cognisantmd.com/intake/patients.html?linkRef=341f072e-411a-4b7a-9966-1d16966af184#/online-booking';
 
     let selectedLocation = null; // 'carling' or 'richmond'
@@ -433,7 +434,8 @@
       if (orleansBtn) {
         orleansBtn.onclick = function() {
           selectedLocation = 'orleans';
-          window.location.href = ORLEANS_BOOKING;
+          if (locationPopup) locationPopup.classList.remove('show');
+          if (healthCardPopup) healthCardPopup.classList.add('show');
         };
       }
 
@@ -449,6 +451,8 @@
         nonProvincialBtn.onclick = function() {
           if (selectedLocation === 'carling') {
             window.location.href = CARLING_BOOKING;
+          } else if (selectedLocation === 'orleans') {
+            window.location.href = ORLEANS_BOOKING;
           } else {
             window.location.href = RICHMOND_NONPROV_REDIRECT;
           }
@@ -476,6 +480,8 @@
         existingPatientBtn.onclick = function() {
           if (selectedLocation === 'carling') {
             window.open(CARLING_BOOKING, '_blank');
+          } else if (selectedLocation === 'orleans') {
+            window.open(ORLEANS_EXISTING, '_blank');
           } else {
             window.open(RICHMOND_EXISTING, '_blank');
           }
@@ -486,6 +492,8 @@
         newPatientBtn.onclick = function() {
           if (selectedLocation === 'carling') {
             window.open(CARLING_BOOKING, '_blank');
+          } else if (selectedLocation === 'orleans') {
+            window.open(ORLEANS_BOOKING, '_blank');
           } else {
             window.open(RICHMOND_NEW, '_blank');
           }
