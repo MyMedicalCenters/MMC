@@ -122,13 +122,21 @@
       margin-bottom: 1.5rem;
     }
     .photo-placeholder {
-      width: 180px;
-      height: 180px;
+      width: 140px;
+      height: 140px;
       border-radius: 50%;
       display: block;
-      margin: 0 auto 2rem auto;
+      margin: 0 0 1.5rem 0; /* no auto-centering inside flex */
       box-shadow: 0 2px 8px rgba(0,0,0,0.08);
       object-fit: cover; /* ensures the image fills the circle */
+    }
+    .team-photos {
+      display: flex;
+      gap: 1.25rem;
+      justify-content: center;
+      align-items: center;
+      margin-bottom: 1.5rem;
+      flex-wrap: nowrap;
     }
     .contact-box {
       background: var(--secondary);
@@ -348,8 +356,11 @@
   </header>
   <main class="main-content">
     <h1>Women's Health Clinic<br><span style="font-size:1.3rem;font-weight:400;">with Dr. Keiko Chan & Dr. Sawini Fernando</span></h1>
-  <!-- Replace the image file at ./images/keiko_summer.jpg with your photo of Keiko and Summer -->
-  <img src="https://i.postimg.cc/vBP5Btt3/1000015982.jpg" alt="Dr. Keiko Chan" class="photo-placeholder">
+  <!-- Two framed photos: Dr. Keiko (left) and Dr. Sawini (right) -->
+  <div class="team-photos">
+    <img src="https://i.postimg.cc/vBP5Btt3/1000015982.jpg" alt="Dr. Keiko Chan" class="photo-placeholder">
+    <img src="https://i.postimg.cc/W1ZHS7Xn/image-2026-06-06-135349248-modified.png" alt="Dr. Sawini Fernando" class="photo-placeholder">
+  </div>
     <div class="referral-section" id="referralSection">
       <h2>We only accept referrals through OceanMD</h2>
       <p style="text-align:center; margin-top:0.8rem;">
@@ -376,14 +387,13 @@
       <li>Menstrual Consultations (irregular menses, painful menses, heavy menses, PCOS, endometriosis, adenomyosis)</li>
       <li>Medical Abortion &lt;10 weeks</li>
       <li>Endometrial biopsy (for investigating post-menopausal bleeding)</li>
-      <li>Peri/Menopause Consultations (hormone and non-hormonal options)</li>
       <li>Severe menstrual mood disorders (Premenstrual Dysphoric Disorder, a.k.a. PMDD)</li>
     </ul>
     <div class="bio-section">
       <!-- Removed duplicate services/bio block per user request -->
       <h2>About Dr. Keiko Chan</h2>
       <div class="bio">
-        Dr. Keiko Chan completed medical school in Calgary, then moved to Ottawa for her residency in Family Medicine. Throughout residency, she focused on women’s health, working at the Shirley E Greenberg Center twice weekly. Upon graduation, Dr. Chan continued to explore women’s health for patients of all ages, ranging from contraception to menopause care. She is passionate about making procedures such as IUD insertions, endometrial biopsies, or even pap/HPV smears as comfortable as possible in the outpatient setting. At pre-procedure consultations, Dr. Chan will present patients with pain management options including cervical nerve blocks, inhaled Penthrox, and anxiolytic medications. Dr. Chan is also active in the Ottawa community, often giving public talks on evidence-based medicine in perimenopause and menopause. She is also pursuing her Menopause Society Certified Practitioner (MSCP) status with The Menopause Society and hopes to become certified in late October 2025.
+        Dr. Keiko Chan completed medical school in Calgary, then moved to Ottawa for her residency in Family Medicine. Throughout residency, she focused on women’s health, working at the Shirley E Greenberg Center twice weekly. Upon graduation, Dr. Chan continued to explore women’s health for patients of all ages, ranging from contraception and more. She is passionate about making procedures such as IUD insertions, endometrial biopsies, or even pap/HPV smears as comfortable as possible in the outpatient setting. At pre-procedure consultations, Dr. Chan will present patients with pain management options including cervical nerve blocks, inhaled Penthrox, and anxiolytic medications. Dr. Chan is also active in the Ottawa community, often giving public talks on evidence-based medicine in perimenopause and menopause. She is also pursuing her Menopause Society Certified Practitioner (MSCP) status with The Menopause Society and hopes to become certified in late October 2025.
       </div>
       <h2>About Dr. Sawini Fernando</h2>
       <div class="bio">
