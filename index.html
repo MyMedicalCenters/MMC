@@ -221,6 +221,39 @@
       text-align: center;
     }
 
+    /* Dr. Imran popup (physician announcement) — compact sizing */
+    #physicianPopup .popup {
+      max-width: 350px;
+      width: min(90%, 300px);
+      padding: 1.2rem 1rem;
+      max-height: 90vh;
+      overflow-y: auto;
+    }
+
+    #physicianPopup .popup img {
+      max-width: 100%;
+      height: auto;
+      max-height: 90vh;
+      border-radius: 6px;
+      margin-bottom: 0.7rem;
+    }
+
+    #physicianPopup .popup h2 {
+      font-size: 1.15rem;
+      margin: 0.5rem 0 0.6rem;
+    }
+
+    #physicianPopup .popup p {
+      font-size: 0.95rem;
+      margin: 0 0 0.9rem;
+    }
+
+    #physicianPopup .button {
+      padding: 0.65rem 1.4rem;
+      font-size: 0.92rem;
+      margin: 0.5rem 0;
+    }
+
     /* Button Styles */
     .button {
       padding: 0.8rem 2rem;
@@ -299,6 +332,35 @@
     .hero-cta { height: 160px; margin-top: 80px; }
     .big-appointment-btn { font-size: 1.1rem; padding: 0.9rem 1.6rem; }
     .video-container { height: 50vh; }
+
+    /* Dr. Imran popup mobile sizing */
+    #physicianPopup .popup {
+      max-width: 280px;
+      width: min(90%, 280px);
+      padding: 1.1rem 0.9rem;
+      max-height: 65vh;
+    }
+
+    #physicianPopup .popup img {
+      max-height: 32vh;
+      margin-bottom: 0.6rem;
+    }
+
+    #physicianPopup .popup h2 {
+      font-size: 1.1rem;
+      margin: 0.4rem 0 0.5rem;
+    }
+
+    #physicianPopup .popup p {
+      font-size: 0.92rem;
+      margin: 0 0 0.8rem;
+    }
+
+    #physicianPopup .button {
+      padding: 0.6rem 1.2rem;
+      font-size: 0.9rem;
+      margin: 0.4rem 0;
+    }
   }
 
 
@@ -494,6 +556,17 @@
   </main>
 
   <!-- Popup -->
+  <!-- Physician Announcement Popup (shown first) -->
+  <div class="popup-overlay" id="physicianPopup">
+    <div class="popup">
+      <img src="https://i.postimg.cc/KcrNq4Mv/Whats-App-Image-2026-06-22-at-1-59-24-PM-(1).png" alt="New Physician" style="max-width:100%;border-radius:8px;margin-bottom:1rem;">
+      <h2>New Physician Joining July 20</h2>
+      <p>We're excited to announce a new physician joining our clinic on <strong>July 20</strong>. He is now enrolling new patients — reserve your spot today.</p>
+      <button class="button clients" id="enrollNowBtn">Enroll Now</button>
+      <button class="button" id="dismissPhysicianBtn" style="background:#e0e0e0;color:#111;margin-top:0.5rem;">Later</button>
+    </div>
+  </div>
+
   <div class="popup-overlay" id="popupOverlay">
     <div class="popup">
       <h2>Welcome to My Medical Centers</h2>
@@ -532,9 +605,17 @@
     const announcementPopup = document.getElementById('announcementPopup');
     const closeAnnouncementBtn = document.getElementById('closeAnnouncementBtn');
 
-    // Show popup on page load
+    // Show physician announcement first on page load (fallback to main popup)
+    const physicianPopup = document.getElementById('physicianPopup');
+    const enrollNowBtn = document.getElementById('enrollNowBtn');
+    const dismissPhysicianBtn = document.getElementById('dismissPhysicianBtn');
+
     window.addEventListener('load', () => {
-      popupOverlay.classList.add('show');
+      if (physicianPopup) {
+        physicianPopup.classList.add('show');
+      } else {
+        popupOverlay.classList.add('show');
+      }
     });
 
     // Play video with sound when "For Clients" is clicked
@@ -724,6 +805,21 @@
       // Keep video paused and muted until user chooses
       video.muted = true;
     });
+
+    // Handlers for physician announcement popup
+    if (enrollNowBtn) {
+      enrollNowBtn.addEventListener('click', () => {
+        // Go to appointment/enrollment page
+        window.location.href = 'appointment.html';
+      });
+    }
+
+    if (dismissPhysicianBtn) {
+      dismissPhysicianBtn.addEventListener('click', () => {
+        if (physicianPopup) physicianPopup.classList.remove('show');
+        if (popupOverlay) popupOverlay.classList.add('show');
+      });
+    }
 
      // Hamburger menu functionality
     const hamburgerMenu = document.getElementById('hamburgerMenu');
