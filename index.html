@@ -555,15 +555,15 @@
     </div>
   </main>
 
-  <!-- Popup -->
-  <!-- Physician Announcement Popup (shown first) -->
-  <div class="popup-overlay" id="physicianPopup">
-    <div class="popup">
-      <img src="https://i.postimg.cc/KcrNq4Mv/Whats-App-Image-2026-06-22-at-1-59-24-PM-(1).png" alt="New Physician" style="max-width:100%;border-radius:8px;margin-bottom:1rem;">
-      <h2>New Physician Joining July 20</h2>
-      <p>We're excited to announce a new physician joining our clinic on <strong>July 20</strong>. He is now enrolling new patients — reserve your spot today.</p>
-      <button class="button clients" id="enrollNowBtn">Enroll Now</button>
-      <button class="button" id="dismissPhysicianBtn" style="background:#e0e0e0;color:#111;margin-top:0.5rem;">Later</button>
+  <!-- Civic Holiday Notice Popup (shown first on website start) -->
+  <div class="popup-overlay" id="holidayPopup">
+    <div class="popup" style="max-width: 440px; border-top: 5px solid var(--accent);">
+      <div style="font-size: 2.2rem; margin-bottom: 0.3rem;">📢</div>
+      <h2 style="color: var(--accent); font-weight: bold; margin-top: 0; margin-bottom: 0.8rem; font-size: 1.35rem;">Holiday Closure Notice</h2>
+      <p style="font-size: 1.05rem; line-height: 1.5; margin-bottom: 1.2rem; color: #333;">
+        For <strong>Monday, August 3rd</strong>, due to the <strong>Civic holiday</strong>, the <strong>Carling</strong> and <strong>Richmond</strong> locations will be closed.
+      </p>
+      <button class="button clients" id="closeHolidayBtn" style="margin-top: 0.5rem; font-weight: 600;">OK</button>
     </div>
   </div>
 
@@ -605,18 +605,30 @@
     const announcementPopup = document.getElementById('announcementPopup');
     const closeAnnouncementBtn = document.getElementById('closeAnnouncementBtn');
 
-    // Show physician announcement first on page load (fallback to main popup)
-    const physicianPopup = document.getElementById('physicianPopup');
-    const enrollNowBtn = document.getElementById('enrollNowBtn');
-    const dismissPhysicianBtn = document.getElementById('dismissPhysicianBtn');
+    // Show holiday notice popup first on page load (fallback to main popup)
+    const holidayPopup = document.getElementById('holidayPopup');
+    const closeHolidayBtn = document.getElementById('closeHolidayBtn');
 
-    window.addEventListener('load', () => {
-      if (physicianPopup) {
-        physicianPopup.classList.add('show');
-      } else {
+    function showInitialPopup() {
+      if (holidayPopup) {
+        holidayPopup.classList.add('show');
+      } else if (popupOverlay) {
         popupOverlay.classList.add('show');
       }
-    });
+    }
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', showInitialPopup);
+    } else {
+      showInitialPopup();
+    }
+
+    if (closeHolidayBtn) {
+      closeHolidayBtn.addEventListener('click', () => {
+        if (holidayPopup) holidayPopup.classList.remove('show');
+        if (popupOverlay) popupOverlay.classList.add('show');
+      });
+    }
 
     // Play video with sound when "For Clients" is clicked
     document.getElementById('clientButton').addEventListener('click', () => {
@@ -805,21 +817,6 @@
       // Keep video paused and muted until user chooses
       video.muted = true;
     });
-
-    // Handlers for physician announcement popup
-    if (enrollNowBtn) {
-      enrollNowBtn.addEventListener('click', () => {
-        // Go to appointment/enrollment page
-        window.location.href = 'appointment.html';
-      });
-    }
-
-    if (dismissPhysicianBtn) {
-      dismissPhysicianBtn.addEventListener('click', () => {
-        if (physicianPopup) physicianPopup.classList.remove('show');
-        if (popupOverlay) popupOverlay.classList.add('show');
-      });
-    }
 
      // Hamburger menu functionality
     const hamburgerMenu = document.getElementById('hamburgerMenu');
