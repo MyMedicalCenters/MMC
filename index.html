@@ -848,7 +848,7 @@
     closeAnnouncementBtn.addEventListener('click', () => {
       announcementPopup.classList.remove('show');
       // Keep video paused and muted until user chooses
-      video.muted = true;
+      if (video) video.muted = true;
     });
 
      // Hamburger menu functionality
