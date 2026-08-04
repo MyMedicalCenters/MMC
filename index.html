@@ -836,11 +836,13 @@
     window.addEventListener('load', setVideoLayout);
 
     // Add event listeners to the buttons at the end of the video
-    document.getElementById('learnMoreBtn').addEventListener('click', () => {
+    const learnMoreBtn = document.getElementById('learnMoreBtn');
+    if (learnMoreBtn) learnMoreBtn.addEventListener('click', () => {
       window.location.href = 'services.html';
     });
 
-    document.getElementById('joinWaitlistBtn').addEventListener('click', () => {
+    const joinWaitlistBtn = document.getElementById('joinWaitlistBtn');
+    if (joinWaitlistBtn) joinWaitlistBtn.addEventListener('click', () => {
       window.location.href = 'appointment.html';
     });
 
