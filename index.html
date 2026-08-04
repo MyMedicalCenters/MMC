@@ -505,8 +505,9 @@
     <nav class="nav">
       <a href="index.html">Home</a>
       <a href="services.html">Our Services</a>
-  <a href="WHealth.html" id="navProfessionalButton">Women's Health Clinic</a>
-  <a href="#" id="navPapImmunLink">Pap Test & Immunization</a>
+      <a href="dr-sadiku.html">Dr. Sadiku (Psychiatry)</a>
+      <a href="WHealth.html" id="navProfessionalButton">Women's Health Clinic</a>
+      <a href="#" id="navPapImmunLink">Pap Test & Immunization</a>
       <a href="contact-us.html">Contact Us!</a>
       <a href="privacy-policy.html">Privacy Policy</a>
     </nav>
@@ -522,11 +523,12 @@
     <div class="dropdown-menu" id="dropdownMenu">
       <a href="index.html">Home</a>
       <a href="services.html">Our Services</a>
-  <a href="WHealth.html">Women's Health Clinic</a>
-  <a href="#" id="navPapImmunLinkMobile">Pap Test & Immunization</a>
+      <a href="dr-sadiku.html">Dr. Sadiku (Psychiatry)</a>
+      <a href="WHealth.html">Women's Health Clinic</a>
+      <a href="#" id="navPapImmunLinkMobile">Pap Test & Immunization</a>
       <a href="contact-us.html">Contact Us!</a>
       <a href="privacy-policy.html">Privacy Policy</a>
-  <button onclick="window.location.href='appointment.html'" class="book-appointment-btn" style="display:inline-flex; margin-top:1.5rem; width:auto; font-size:1.2rem;">Book Appointment Now!</button>
+      <button onclick="window.location.href='appointment.html'" class="book-appointment-btn" style="display:inline-flex; margin-top:1.5rem; width:auto; font-size:1.2rem;">Book Appointment Now!</button>
     </div>
   </header>
 
@@ -555,6 +557,48 @@
     </div>
   </main>
 
+  <!-- Dr. Olayemi Sadiku Popup Overlay -->
+  <div class="popup-overlay" id="sadikuPopup">
+    <div class="popup" style="max-width: 480px; border-top: 5px solid var(--primary); text-align: left; padding: 1.8rem; position: relative;">
+      <button id="closeSadikuX" aria-label="Close" style="position: absolute; top: 12px; right: 15px; background: none; border: none; font-size: 1.6rem; color: #888; cursor: pointer; line-height: 1; padding: 4px 8px; border-radius: 4px;">&times;</button>
+      
+      <div style="display: flex; align-items: center; gap: 0.8rem; margin-bottom: 1rem;">
+        <div style="background: rgba(0, 119, 190, 0.1); color: var(--primary); padding: 0.6rem; border-radius: 50%; font-size: 1.6rem; display: flex; align-items: center; justify-content: center; min-width: 48px; min-height: 48px;">
+          🧠
+        </div>
+        <div>
+          <span style="background: #28a745; color: white; font-size: 0.75rem; font-weight: 600; padding: 0.25rem 0.65rem; border-radius: 12px; text-transform: uppercase; letter-spacing: 0.5px; display: inline-block;">Accepting New Referrals</span>
+          <h2 style="color: var(--primary); font-weight: 700; margin: 0.25rem 0 0 0; font-size: 1.4rem; line-height: 1.2;">Dr. Olayemi Sadiku</h2>
+        </div>
+      </div>
+
+      <div style="background: #f8fafc; border-radius: 8px; padding: 1.1rem; margin-bottom: 1.2rem; border-left: 4px solid var(--primary); box-shadow: inset 0 0 0 1px rgba(0,0,0,0.03);">
+        <p style="margin: 0 0 0.5rem 0; font-size: 1.1rem; font-weight: 600; color: #1e293b;">
+          Psychiatrist
+        </p>
+        <p style="margin: 0 0 0.8rem 0; font-size: 0.98rem; color: #334155; line-height: 1.45;">
+          ⚡ <strong>Very short waiting time</strong> for new patient referrals.
+        </p>
+        <hr style="border: 0; border-top: 1px solid #e2e8f0; margin: 0.8rem 0;">
+        
+        <p style="margin: 0.4rem 0; font-size: 0.95rem; color: #334155; line-height: 1.4;">
+          📍 <strong>Location:</strong> Orléans Location<br>
+          <span style="font-size: 0.92rem; color: #475569; margin-left: 1.4rem; display: block; margin-top: 0.2rem; font-weight: 500;">
+            6497 Jeanne-d'Arc Blvd. N, Orléans, ON K1C 2R1
+          </span>
+        </p>
+        
+        <p style="margin: 0.6rem 0 0 0; font-size: 0.95rem; color: #334155;">
+          📠 <strong>Fax #:</strong> <a href="tel:3432240424" style="color: var(--primary); font-weight: 600; text-decoration: none;">343-224-0424</a>
+        </p>
+      </div>
+
+      <div style="display: flex; gap: 0.75rem; flex-wrap: wrap;">
+        <button class="button professionals" onclick="window.location.href='dr-sadiku.html'" style="margin: 0; flex: 1 1 60%; font-weight: 600; padding: 0.8rem 1rem; font-size: 0.95rem;">Learn More & Referral Info</button>
+        <button class="button clients" id="closeSadikuBtn" style="margin: 0; flex: 1 1 30%; font-weight: 600; padding: 0.8rem 1rem; font-size: 0.95rem;">OK</button>
+      </div>
+    </div>
+  </div>
 
   <div class="popup-overlay" id="popupOverlay">
     <div class="popup">
@@ -594,13 +638,14 @@
     const announcementPopup = document.getElementById('announcementPopup');
     const closeAnnouncementBtn = document.getElementById('closeAnnouncementBtn');
 
-    // Show holiday notice popup first on page load (fallback to main popup)
-    const holidayPopup = document.getElementById('holidayPopup');
-    const closeHolidayBtn = document.getElementById('closeHolidayBtn');
+    // Popups on initial page load sequence
+    const sadikuPopup = document.getElementById('sadikuPopup');
+    const closeSadikuBtn = document.getElementById('closeSadikuBtn');
+    const closeSadikuX = document.getElementById('closeSadikuX');
 
     function showInitialPopup() {
-      if (holidayPopup) {
-        holidayPopup.classList.add('show');
+      if (sadikuPopup) {
+        sadikuPopup.classList.add('show');
       } else if (popupOverlay) {
         popupOverlay.classList.add('show');
       }
@@ -612,12 +657,15 @@
       showInitialPopup();
     }
 
-    if (closeHolidayBtn) {
-      closeHolidayBtn.addEventListener('click', () => {
-        if (holidayPopup) holidayPopup.classList.remove('show');
-        if (popupOverlay) popupOverlay.classList.add('show');
-      });
+    function handleSadikuClose() {
+      if (sadikuPopup) sadikuPopup.classList.remove('show');
+      if (popupOverlay) {
+        popupOverlay.classList.add('show');
+      }
     }
+
+    if (closeSadikuBtn) closeSadikuBtn.addEventListener('click', handleSadikuClose);
+    if (closeSadikuX) closeSadikuX.addEventListener('click', handleSadikuClose);
 
     // Play video with sound when "For Clients" is clicked
     document.getElementById('clientButton').addEventListener('click', () => {

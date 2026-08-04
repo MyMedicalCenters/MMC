@@ -1,0 +1,673 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Psychiatry Clinic - Dr. Olayemi Sadiku | My Medical Centers</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+    
+    :root {
+      --primary: #0077be;
+      --primary-dark: #005c91;
+      --secondary: #f0f8ff;
+      --accent: #ff6b6b;
+      --client: #28a745;
+      --text: #2d3748;
+      --text-muted: #64748b;
+      --card-bg: #ffffff;
+    }
+
+    body, html {
+      margin: 0;
+      padding: 0;
+      font-family: 'Poppins', sans-serif;
+      color: var(--text);
+      background-color: var(--secondary);
+      overflow-x: hidden;
+      line-height: 1.6;
+    }
+
+    /* Fixed Header */
+    .header {
+      background-color: white;
+      color: var(--primary);
+      padding: 0.4rem 1rem;
+      position: fixed;
+      top: 0;
+      width: 100%;
+      z-index: 1100;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+      max-width: 100%;
+      box-sizing: border-box;
+      overflow: hidden;
+    }
+
+    .logo {
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: var(--primary);
+      line-height: 1;
+      margin-right: 1.5rem;
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      margin-left: 0;
+      width: 100%;
+      justify-content: center;
+      position: relative;
+    }
+
+    .nav a {
+      color: var(--primary);
+      text-decoration: none;
+      margin-left: 1.1rem;
+      font-size: 0.95rem;
+      transition: color 0.3s ease;
+      font-weight: 400;
+      line-height: 1;
+      padding: 0;
+    }
+
+    .nav a:first-child {
+      position: absolute;
+      left: 0;
+      margin-left: 0;
+    }
+
+    .nav a:hover, .nav a.active {
+      color: var(--accent);
+      font-weight: 600;
+    }
+
+    /* Top Left Logo Container */
+    .logo-container {
+      position: absolute;
+      top: 85px;
+      left: 27px;
+      z-index: 1100;
+      width: 100px;
+      transition: transform 0.3s ease-in-out;
+      cursor: pointer;
+    }
+
+    .logo-container img {
+      width: 100%;
+      height: auto;
+    }
+
+    .logo-container:hover {
+      transform: scale(1.1);
+    }
+
+    .book-appointment-btn {
+      background-color: #5fa1bc;
+      color: #fff;
+      padding: 0.18rem 0.7rem;
+      border-radius: 15px;
+      font-size: 0.93rem;
+      border: none;
+      cursor: pointer;
+      margin-left: 1.5rem;
+      text-decoration: none;
+      font-weight: 600;
+      display: inline-flex;
+      align-items: center;
+      height: 28px;
+      line-height: 1;
+      box-shadow: 0 2px 8px rgba(95,161,188,0.08);
+      white-space: nowrap;
+      transition: background-color 0.3s ease;
+    }
+
+    .book-appointment-btn:hover {
+      background-color: #48829a;
+      color: #fff;
+    }
+
+    /* Mobile Hamburger Menu */
+    .hamburger-menu {
+      display: none;
+      cursor: pointer;
+      flex-direction: column;
+      justify-content: space-between;
+      width: 30px;
+      height: 21px;
+    }
+
+    .hamburger-menu div {
+      width: 100%;
+      height: 3px;
+      background-color: var(--primary);
+      transition: all 0.3s ease;
+    }
+
+    .dropdown-menu {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(255, 255, 255, 0.97);
+      justify-content: center;
+      align-items: center;
+      z-index: 1200;
+      flex-direction: column;
+      text-align: center;
+    }
+
+    .dropdown-menu.show {
+      display: flex;
+    }
+
+    .dropdown-menu a {
+      margin: 0.9rem 0;
+      font-size: 1.35rem;
+      color: var(--primary);
+      text-decoration: none;
+      font-weight: 500;
+    }
+
+    /* Main Container */
+    .main-content {
+      padding: 2.5rem 2rem;
+      max-width: 940px;
+      margin: 110px auto 3rem auto;
+      background: var(--card-bg);
+      border-radius: 16px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.06);
+      box-sizing: border-box;
+    }
+
+    /* Hero Banner */
+    .hero-banner {
+      text-align: center;
+      padding-bottom: 2rem;
+      border-bottom: 2px solid #eef2f6;
+      margin-bottom: 2rem;
+    }
+
+    .badge-accepting {
+      background: linear-gradient(135deg, #28a745, #218838);
+      color: white;
+      font-size: 0.88rem;
+      font-weight: 700;
+      padding: 0.4rem 1.1rem;
+      border-radius: 20px;
+      display: inline-block;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      box-shadow: 0 4px 12px rgba(40, 167, 69, 0.25);
+      margin-bottom: 1rem;
+    }
+
+    h1 {
+      color: var(--primary);
+      margin: 0.2rem 0 0.5rem 0;
+      font-size: 2.5rem;
+      font-weight: 700;
+      letter-spacing: -0.5px;
+    }
+
+    .subtitle {
+      font-size: 1.25rem;
+      color: var(--text-muted);
+      font-weight: 500;
+      margin: 0;
+    }
+
+    /* Highlights Grid */
+    .highlights-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1.25rem;
+      margin: 2rem 0;
+    }
+
+    .highlight-card {
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      border-radius: 12px;
+      padding: 1.25rem;
+      text-align: center;
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+    }
+
+    .highlight-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 20px rgba(0, 119, 190, 0.08);
+      border-color: var(--primary);
+    }
+
+    .highlight-icon {
+      font-size: 2rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .highlight-title {
+      font-size: 0.9rem;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: var(--text-muted);
+      font-weight: 600;
+      margin-bottom: 0.25rem;
+    }
+
+    .highlight-value {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--primary);
+      margin: 0;
+    }
+
+    /* Section Styling */
+    h2 {
+      color: var(--primary);
+      font-size: 1.6rem;
+      margin-top: 2.2rem;
+      margin-bottom: 1rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .bio-box {
+      background: var(--secondary);
+      border-left: 5px solid var(--primary);
+      padding: 1.4rem 1.6rem;
+      border-radius: 10px;
+      margin-bottom: 2rem;
+      font-size: 1.05rem;
+      line-height: 1.7;
+    }
+
+    /* Services List Grid */
+    .services-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1rem;
+      margin-bottom: 2rem;
+    }
+
+    .service-item {
+      background: #ffffff;
+      border: 1px solid #e2e8f0;
+      border-left: 4px solid var(--primary);
+      border-radius: 8px;
+      padding: 1rem 1.25rem;
+      font-weight: 500;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.03);
+    }
+
+    .service-item span.check-icon {
+      color: var(--client);
+      font-weight: 700;
+      font-size: 1.2rem;
+    }
+
+    /* Referral Box */
+    .referral-box {
+      background: linear-gradient(135deg, #ffffff, #f0f8ff);
+      border: 2px solid rgba(0, 119, 190, 0.15);
+      border-radius: 14px;
+      padding: 1.75rem;
+      margin: 2.5rem 0;
+      box-shadow: 0 6px 18px rgba(0, 119, 190, 0.05);
+    }
+
+    .referral-box h3 {
+      color: var(--primary);
+      margin-top: 0;
+      margin-bottom: 0.75rem;
+      font-size: 1.35rem;
+    }
+
+    .fax-banner {
+      background: var(--primary);
+      color: white;
+      padding: 1rem 1.5rem;
+      border-radius: 10px;
+      font-size: 1.2rem;
+      font-weight: 700;
+      text-align: center;
+      margin: 1.25rem 0;
+      box-shadow: 0 4px 15px rgba(0, 119, 190, 0.2);
+    }
+
+    .fax-banner a {
+      color: #fff;
+      text-decoration: underline;
+    }
+
+    /* Contact Box */
+    .contact-box {
+      background: #1e293b;
+      color: #f8fafc;
+      padding: 1.8rem;
+      border-radius: 12px;
+      margin-top: 2.5rem;
+    }
+
+    .contact-box h3 {
+      color: #38bdf8;
+      margin-top: 0;
+      margin-bottom: 1rem;
+      font-size: 1.3rem;
+    }
+
+    .contact-box p {
+      margin: 0.5rem 0;
+      font-size: 1.02rem;
+    }
+
+    .contact-box a {
+      color: #38bdf8;
+      text-decoration: none;
+    }
+
+    .contact-box a:hover {
+      text-decoration: underline;
+    }
+
+    /* Action Buttons */
+    .action-buttons {
+      display: flex;
+      justify-content: center;
+      gap: 1.25rem;
+      margin-top: 2rem;
+      flex-wrap: wrap;
+    }
+
+    .btn-cta {
+      background-color: var(--primary);
+      color: white;
+      padding: 0.9rem 2.2rem;
+      border-radius: 30px;
+      font-size: 1.1rem;
+      font-weight: 600;
+      text-decoration: none;
+      transition: transform 0.2s ease, background-color 0.2s ease, box-shadow 0.2s ease;
+      box-shadow: 0 4px 14px rgba(0, 119, 190, 0.25);
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .btn-cta:hover {
+      background-color: var(--primary-dark);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(0, 119, 190, 0.35);
+    }
+
+    .btn-cta.secondary {
+      background-color: #ffffff;
+      color: var(--primary);
+      border: 2px solid var(--primary);
+      box-shadow: none;
+    }
+
+    .btn-cta.secondary:hover {
+      background-color: var(--secondary);
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .nav { display: none; }
+      .hamburger-menu { display: flex; }
+      .book-appointment-btn { display: none !important; }
+      .logo-container { scale: 0; }
+      .main-content {
+        margin-top: 80px;
+        padding: 1.5rem 1rem;
+        border-radius: 0;
+      }
+      h1 { font-size: 1.9rem; }
+      .subtitle { font-size: 1.1rem; }
+      .action-buttons { flex-direction: column; }
+      .btn-cta { text-align: center; justify-content: center; width: 100%; box-sizing: border-box; }
+    }
+
+    /* Popup Styles */
+    .popup-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.5);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 2000;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.3s ease, visibility 0.3s ease;
+    }
+
+    .popup-overlay.show {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .popup {
+      background-color: white;
+      padding: 2rem;
+      border-radius: 10px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      max-width: 400px;
+      width: 90%;
+      text-align: center;
+    }
+
+    .button {
+      padding: 0.8rem 2rem;
+      border-radius: 50px;
+      font-size: 1rem;
+      color: white;
+      border: none;
+      cursor: pointer;
+      margin: 1rem 0;
+      width: 100%;
+      transition: background-color 0.3s ease;
+    }
+
+    .button.professionals { background-color: var(--primary); }
+    .button.professionals:hover { background-color: var(--primary-dark); }
+    .button.clients { background-color: var(--client); }
+    .button.clients:hover { background-color: #218838; }
+  </style>
+</head>
+<body>
+
+  <!-- Top Floating Logo -->
+  <div class="logo-container">
+    <img src="https://i.postimg.cc/wTrcjZ7f/MMC-transformed.png" alt="Medical Center Logo" id="mainLogo">
+  </div>
+
+  <!-- Header Navbar -->
+  <header class="header">
+    <div class="logo">My Medical Centers</div>
+    <nav class="nav">
+      <a href="index.html">Home</a>
+      <a href="services.html">Our Services</a>
+      <a href="dr-sadiku.html" class="active">Dr. Sadiku (Psychiatry)</a>
+      <a href="WHealth.html">Women's Health Clinic</a>
+      <a href="#" id="navPapImmunLink">Pap Test & Immunization</a>
+      <a href="contact-us.html">Contact Us!</a>
+      <a href="privacy-policy.html">Privacy Policy</a>
+    </nav>
+    <a href="appointment.html" class="book-appointment-btn">Book Appointment Now!</a>
+    
+    <!-- Mobile Hamburger Menu -->
+    <div class="hamburger-menu" id="hamburgerMenu">
+      <div></div>
+      <div></div>
+      <div></div>
+    </div>
+
+    <!-- Mobile Dropdown Menu -->
+    <div class="dropdown-menu" id="dropdownMenu">
+      <a href="index.html">Home</a>
+      <a href="services.html">Our Services</a>
+      <a href="dr-sadiku.html">Dr. Sadiku (Psychiatry)</a>
+      <a href="WHealth.html">Women's Health Clinic</a>
+      <a href="#" id="navPapImmunLinkMobile">Pap Test & Immunization</a>
+      <a href="contact-us.html">Contact Us!</a>
+      <a href="privacy-policy.html">Privacy Policy</a>
+      <button onclick="window.location.href='appointment.html'" class="book-appointment-btn" style="margin-top:1.5rem; width:auto; font-size:1.1rem;">Book Appointment Now!</button>
+    </div>
+  </header>
+
+  <!-- Main Content Card -->
+  <main class="main-content">
+    
+    <!-- Hero Banner -->
+    <section class="hero-banner">
+      <div class="badge-accepting">⚡ NOW ACCEPTING NEW REFERRALS</div>
+      <h1>Dr. Olayemi Sadiku</h1>
+      <p class="subtitle">Psychiatrist</p>
+    </section>
+
+    <!-- Key Highlights Grid -->
+    <div class="highlights-grid">
+      <div class="highlight-card">
+        <div class="highlight-icon">🧠</div>
+        <div class="highlight-title">Specialty</div>
+        <div class="highlight-value">Psychiatry</div>
+      </div>
+      <div class="highlight-card">
+        <div class="highlight-icon">⏱️</div>
+        <div class="highlight-title">Wait Time</div>
+        <div class="highlight-value">Very Short Wait</div>
+      </div>
+      <div class="highlight-card">
+        <div class="highlight-icon">📍</div>
+        <div class="highlight-title">Practice Location</div>
+        <div class="highlight-value">Orléans Location</div>
+      </div>
+      <div class="highlight-card">
+        <div class="highlight-icon">📠</div>
+        <div class="highlight-title">Referral Fax</div>
+        <div class="highlight-value"><a href="tel:3432240424" style="color:var(--primary);text-decoration:none;">343-224-0424</a></div>
+      </div>
+    </div>
+
+    <!-- About Dr. Sadiku -->
+    <h2>👨‍⚕️ About Dr. Olayemi Sadiku</h2>
+    <div class="bio-box">
+      <strong>Dr. Olayemi Sadiku</strong> is a dedicated Psychiatrist providing comprehensive psychiatric evaluations, evidence-based consultations, and ongoing mental health management. Practicing out of our <strong>Orléans Location</strong>, Dr. Sadiku is committed to compassionate, individualized, patient-centered care. With a focus on timely intervention, Dr. Sadiku is currently accepting new physician referrals with <strong>very short waiting times</strong> to ensure patients receive prompt psychiatric assessment and support.
+    </div>
+
+    <!-- Areas of Practice & Services -->
+    <h2>📋 Clinical Areas of Focus</h2>
+    <div class="services-list">
+      <div class="service-item">
+        <span class="check-icon">✓</span> Comprehensive Psychiatric Assessments
+      </div>
+      <div class="service-item">
+        <span class="check-icon">✓</span> Mood Disorders (Depression, Bipolar Disorder)
+      </div>
+      <div class="service-item">
+        <span class="check-icon">✓</span> Anxiety & Stress-Related Disorders
+      </div>
+      <div class="service-item">
+        <span class="check-icon">✓</span> Psychopharmacology & Medication Optimization
+      </div>
+      <div class="service-item">
+        <span class="check-icon">✓</span> Adult Mental Health Consultations
+      </div>
+      <div class="service-item">
+        <span class="check-icon">✓</span> Collaborative Care & Follow-Up Management
+      </div>
+    </div>
+
+    <!-- Referral Information -->
+    <div class="referral-box">
+      <h3>📄 Referral Instructions for Physicians</h3>
+      <p style="font-size:1.05rem; margin-bottom:1rem;">
+        Physicians and health professionals may send patient referrals directly to Dr. Olayemi Sadiku via Fax.
+      </p>
+      
+      <div class="fax-banner">
+        📠 Direct Referral Fax: <a href="tel:3432240424">343-224-0424</a>
+      </div>
+
+      <p style="margin-bottom:0.5rem; font-weight:600;">How to Submit a Referral:</p>
+      <ul style="margin-top:0.3rem; padding-left:1.4rem;">
+        <li>Fax referral notes, relevant patient history, and medical records to <strong>343-224-0424</strong>.</li>
+        <li>Specify <strong>"Dr. Olayemi Sadiku - Psychiatry Referral"</strong> on the cover page.</li>
+        <li>Our referrals coordinator will contact the patient promptly to schedule their initial consultation.</li>
+      </ul>
+    </div>
+
+    <!-- Contact & Location Box -->
+    <div class="contact-box">
+      <h3>📍 Practice Location & Contact Details</h3>
+      <p><strong>Location:</strong> Orléans Location – My Medical Centers 3</p>
+      <p><strong>Address:</strong> 6497 Jeanne-d'Arc Blvd. N, Orléans, ON K1C 2R1</p>
+      <p><strong>Phone:</strong> <a href="tel:6137042524">613-704-2524</a></p>
+      <p><strong>Direct Fax for Referrals:</strong> <a href="tel:3432240424">343-224-0424</a></p>
+      <p><strong>Email:</strong> <a href="mailto:orleans@mymedicalcenters.ca">orleans@mymedicalcenters.ca</a></p>
+    </div>
+
+    <!-- Action Buttons -->
+    <div class="action-buttons">
+      <a href="appointment.html" class="btn-cta">📅 Patient Registration & Booking</a>
+      <a href="contact-us.html" class="btn-cta secondary">💬 Contact Us</a>
+    </div>
+
+  </main>
+
+  <!-- Mobile Hamburger Script -->
+  <script>
+    const hamburgerMenu = document.getElementById('hamburgerMenu');
+    const dropdownMenu = document.getElementById('dropdownMenu');
+
+    if (hamburgerMenu && dropdownMenu) {
+      hamburgerMenu.addEventListener('click', () => {
+        dropdownMenu.classList.toggle('show');
+      });
+    }
+  </script>
+
+  <!-- Pap Test & Immunization Popup Module -->
+  <script>
+    (function() {
+      function createSecondaryPopup() {
+        if (document.getElementById('secondaryPopup')) return;
+        const secondary = document.createElement('div');
+        secondary.className = 'popup-overlay';
+        secondary.id = 'secondaryPopup';
+        secondary.innerHTML = `
+          <div class="popup">
+            <h2>Select Request</h2>
+            <p>Please choose:</p>
+            <button class="button professionals" id="papTestBtn">Pap Test</button>
+            <button class="button clients" id="immunBtn">Immunization Request</button>
+            <button class="button" id="backToMainBtn" style="background:#e0e0e0;color:#111;margin-top:0.5rem;">Back</button>
+          </div>`;
+        document.body.appendChild(secondary);
+        document.getElementById('papTestBtn').addEventListener('click', () => window.location.href='https://tally.so/r/jakO8a');
+        document.getElementById('immunBtn').addEventListener('click', () => window.location.href='https://tally.so/r/Xx2K6g');
+        document.getElementById('backToMainBtn').addEventListener('click', () => document.getElementById('secondaryPopup').classList.remove('show'));
+      }
+
+      const navLink = document.getElementById('navPapImmunLink');
+      const navLinkMobile = document.getElementById('navPapImmunLinkMobile');
+      if (navLink) navLink.addEventListener('click', (e) => { e.preventDefault(); createSecondaryPopup(); document.getElementById('secondaryPopup').classList.add('show'); });
+      if (navLinkMobile) navLinkMobile.addEventListener('click', (e) => { e.preventDefault(); createSecondaryPopup(); document.getElementById('secondaryPopup').classList.add('show'); document.getElementById('dropdownMenu').classList.remove('show'); });
+    })();
+  </script>
+
+</body>
+</html>
