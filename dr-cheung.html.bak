@@ -5,16 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Integumentary &amp; Special Procedures - Dr. Dennis Cheung | My Medical Centers</title>
   <meta name="description" content="Specialized integumentary procedures, minor skin surgery, lumps & bumps, gynecological procedures, male sexual health, and Botox injections with Dr. Dennis Cheung (FCFP, FAAFP) at My Medical Centers in Ottawa." />
-  <meta name="robots" content="noindex, nofollow">
-  <meta http-equiv="refresh" content="0; url=index.html">
-  <script>
-    window.location.replace("index.html");
-  </script>
   <link rel="stylesheet" href="css/theme.css">
   <link rel="icon" href="MMC-transformed.png" type="image/png">
-  <style>
-    body { display: none !important; }
-  </style>
   <style>
     .procedures-hero-card {
       background: linear-gradient(135deg, #072b4a 0%, #0284c7 100%);
